@@ -1,0 +1,137 @@
+﻿/*按钮样式*/
+.btn {
+ BORDER-RIGHT: #7b9ebd 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #7b9ebd 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#cecfde); BORDER-LEFT: #7b9ebd 1px solid; CURSOR: hand; COLOR: black; PADDING-TOP: 2px; BORDER-BOTTOM: #7b9ebd 1px solid;
+filter : progid:DXImageTransform.Microsoft.gradient(startColorStr=#96CDCD,endColorStr=#FFFFFF);
+}
+.aaaaa
+{
+	 background-color:Red;
+}
+/*添加 删除 修改icon样式*/
+.hotelmanageicon
+{
+	background-image: url(../../../res/images/framework/icons/hotelmanage.png) !important;
+}
+.addicon
+{
+	background-image: url(../../../res/images/framework/icons/add.png) !important;
+}
+.editicon
+{
+	background-image: url(../../../res/images/framework/icons/edit.png) !important;
+}
+.deleteicon
+{
+	background-image: url(../../../res/images/framework/icons/delete.png) !important;
+}
+.refreshicon
+{
+	background-image: url(../../../res/images/framework/icons/refresh.png) !important;
+}
+.roomtypeicon
+{
+	background-image: url(../../../res/images/framework/icons/roomtypeicon.gif) !important;
+}
+.indexicon
+{
+	background-image: url(../../../res/images/framework/icons/indexicon.gif) !important;
+}
+.todaypriceicon
+{
+	background-image: url(../../../res/images/framework/icons/todaypriceicon.gif) !important;
+	
+}
+.roomtypeseeicon
+{
+	background-image: url(../../../res/images/framework/icons/roomtypeseeicon.png) !important;
+	
+}
+.closetabone
+{
+	background-image: url(../../../res/images/framework/icons/closetabone.gif) !important;
+	
+}
+.closetaball
+{
+	background-image: url(../../../res/images/framework/icons/closetaball.gif) !important;
+	
+}
+.gonggao
+{
+	background-image: url(../../../res/images/framework/icons/gonggao.gif) !important;
+}
+.serchopenroomrecord
+{
+	
+	background-image: url(../../../res/images/framework/icons/serchopenroomrecord.png) !important;
+}
+
+.homemanage
+{
+	background-image: url(../../../res/images/framework/icons/homemanage.gif) !important;
+}
+
+.sysmanagemenu
+{
+	background-image: url(../../../res/images/framework/icons/sysmanagemenu.png) !important;
+}
+
+.allmanagemenu
+{
+	background-image: url(../../../res/images/framework/icons/allmanagemenu.png) !important;
+}
+
+
+.setuseridicon
+{
+	background-image: url(../../../res/images/framework/icons/setuseridicon.png) !important;
+}
+.openroomicon
+{
+	background-image: url(../../../res/images/framework/icons/openroomicons.gif) !important;
+}
+.openroomiconinfo
+{
+	background-image: url(../../../res/images/framework/icons/openroomiconinfo.gif) !important;
+}
+.roomicons
+{
+	background-image: url(../../../res/images/framework/icons/roomicons.gif) !important;
+}
+.guesticon
+{
+	background-image: url(../../../res/images/framework/icons/guesticon.png) !important;
+}
+.roolrecordicon
+{
+	background-image: url(../../../res/images/framework/icons/roolrecordicon.png) !important;
+}
+.roolrecordicons
+{
+	background-image: url(../../../res/images/framework/icons/roolrecordicon.png) !important;
+}
+.totalicon
+{
+	background-image: url(../../../res/images/framework/icons/totalicon.png) !important;
+}
+
+.usericon
+{
+	background-image: url(../../../res/images/framework/icons/usericon.png) !important;
+}
+.publishicon
+{
+	background-image: url(../../../res/images/framework/icons/publishicon.png) !important;
+}
+.zi1 {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #FFFFFF;	
+	margin:70px 0 0 100px;
+	height:20px;
+	line-height:20px;
+}
+div,.scrollbar
+{
+	scrollbar-face-color: #DBEBFE; scrollbar-shadow-color: #B8D6FA; scrollbar-highlight-color: #FFFFFF; scrollbar-3dlight-color: #DBEBFE; scrollbar-darkshadow-color:#458CE4; scrollbar-track-color: #FFFFFF; scrollbar-arrow-color: #458CE4;
+}

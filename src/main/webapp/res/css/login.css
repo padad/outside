@@ -1,0 +1,54 @@
+﻿*{margin:0px; padding:0px;font-size:12px; font-family:"宋体";}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
+a:active {
+	text-decoration: none;
+}
+.cl{clear:both;}
+.fl{float:left}
+.p_left10{padding-left:10px;}
+.input02{width:150px; height:18px; padding-left:5px; padding-top:3px;}
+.mar_10{margin-left:10px;}
+
+#def_top{background:url(../images/login/def_topbg.jpg) repeat-x; height:91px; width:100%;}
+#def_top01{float:left;background:url(../images/login/def_top01.jpg) no-repeat;height:91px; width:786px;}
+#def_top02{float:left;background:url(../images/login/def_top02.jpg) no-repeat;height:91px; width:216px;}
+#biao{color:#fff;margin-top:20px; width:216px;}
+#biao a{display:block; width:92px; height:28px;color:#fff;}
+#biao a:hover{display:block; background:url(../images/login/anni03.jpg) no-repeat;width:92px; height:28px;color:#fff;}
+.biaotu{position:absolute;margin-top:7px;margin-left:12px;}
+.biaozi{position:absolute; margin-left:32px; margin-top:7px;}
+#biao div{float:left;}
+#time{color:#fff; margin-left:12px; width:216px; margin-top:10px; } 
+#mid{ background:url(../images/login/midbg.jpg) repeat-x; height:500px;}
+#menu{background:url(../images/login/menubg.jpg) repeat-x; height:26px;}
+
+#top,#con,#bot,#botzi{width:1002px; margin:auto;}
+#toplog{ float:left;background:url(../images/login/default_log.jpg) no-repeat; width:550px; height:85px;}
+#toplink{ float:right; margin-top:50px; padding-right:60px;}
+#con01{background:url(../images/login/default_mid01.jpg) no-repeat; width:550px; height:230px;}
+#con02{background:url(../images/login/default_mid02.jpg) no-repeat; width:550px; height:230px;}
+#conright{background:url(../images/login/default_mid03.jpg) no-repeat; width:452px; height:474px;}
+#conleft,#conright{float:left;}
+.botimg{padding:20px;}
+#botzi{float:left;color:#94acbc; text-align:center;}
+#botimglink{ width:700px; margin:0px auto;}
+#denglu{ margin-top:120px; margin-left:15px;}
+#denglu ul,li{list-style:none; margin-top:10px;}
+.anni02{background:url(../images/login/anni02.jpg) no-repeat; width:80px; height:29px; border:0px; color:#fff; padding:0px; margin:0px; font-size:14px;}
+a.wjmm:link{color:#3366cc; text-decoration:underline !important;}
+a.wjmm:visited{color:#3366cc; text-decoration:underline !important;}
+a.wjmm:hover{color:#3366cc; text-decoration:underline !important;}
+a.wjmm:active{color:#3366cc; text-decoration:underline !important;}
+.check{margin-top:10px; padding-right:5px;}
+#checkzi a{ color:#999;}
+#checkzi a:hover{ color:#999;}
+#toplink a{color:#bebebe;}
+#toplink a:hover{color:#bebebe;}

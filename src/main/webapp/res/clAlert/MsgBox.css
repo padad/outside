@@ -1,0 +1,218 @@
+.gSys-msg {
+display:block;
+line-height:166.6%;
+z-index:900;
+border-color:#000;
+color:#000;
+}
+.ico
+{
+	left:25px;
+	top:20px;
+	position:absolute;
+	height:32px;
+	width:32px;
+	overflow:hidden;
+	display:inline-block;
+	vertical-align:middle;
+	-moz-box-align:center;
+}
+.ico-point
+{
+	background:url(bg.png) no-repeat -112px 0;
+}
+.ico-imp
+{
+	background:url(bg.png) no-repeat -33px 0;
+}
+.ico-warn
+{
+	background:url(bg.png) no-repeat -272px 0;
+}
+.ico-suc
+{
+	background:url(bg.png) no-repeat -192px 0;
+}
+.gSys-msg .mask {
+background-color:#cccccc;
+height:100%;
+left:0;
+opacity:0.2;
+overflow:hidden;
+position:absolute;
+top:0;
+width:100%;
+z-index:900;
+filter:progid:DXImageTransform.Microsoft.Alpha(style=3,opacity=12,finishOpacity=85);
+}
+.gSys-msg .mask img {
+border:0 none;
+height:100%;
+width:100%;
+}
+.txt-14 {
+font-size:14px;
+}
+.gSys-msg-win {
+height:auto;
+left:auto;
+position:absolute;
+top:20%;
+width:460px;
+z-index:901;
+}
+.gSys-msg-win .hd 
+{
+background: url(bgx.png) repeat-x 0 -216px;
+background-color:#1F5699;
+font-family:Verdana,snas-serif;
+cursor:move;
+height:27px;
+line-height:27px;
+}
+.gSys-msg-win .hd h4 {
+color:#FFFFFF;
+float:left;
+font-size:14px;
+font-weight:bold;
+margin-left:10px;
+margin-right:5px;
+margin:0;
+padding:0;
+border:0 none;
+}
+
+.gSys-msg-win .hd .sub {
+color:#FFFFFF;
+float:left;
+}
+.gSys-msg-win .hd span.fn-bg {
+display:block;
+height:27px;
+width:2px;
+}
+.gSys-msg-win .hd .rc-l {
+background: url(bg.png) no-repeat -1584px -108px;
+float:left;
+}
+
+.gSys-msg-win .hd .rc-r {
+background: url(bg.png) no-repeat -1586px -108px;
+float:right;
+}
+.gSys-msg-win .hd a.fn-bg {
+display:block;
+float:right;
+height:20px;
+margin-right:2px;
+margin-top:3px;
+outline:medium none;
+overflow:hidden;
+text-indent:300px;
+width:20px;
+}
+.gSys-msg-win .hd a.Aclose {
+background:url(bg.png) no-repeat 0 0;
+color:#005590;
+cursor:pointer;
+}
+.gSys-msg-win .hd a.Aclose:hover {
+background-position:0 -36px;
+}
+.gSys-msg-win .hd a.Aclose:active {
+background-position:0 -35px;
+}
+
+.gSys-msg-win .cont {
+background-color:#fff;
+border:1px solid #6C92AD;
+height:100%;
+overflow:auto;	
+display:block;
+clear:left;
+}
+.gSys-msg-win .ft {
+border-style:solid;
+border-width:0 1px 1px;
+clear:both;
+height:42px;
+padding:0 8px;
+}
+.gSys-inner-comm {
+position:relative;
+text-align:left;
+}
+.gSys-inner-comm .ct {
+font-family:simsun;
+font-size:14px;
+padding:25px 15px 30px 75px;
+word-wrap:break-word;
+}
+ .bdr-c-dark
+{	
+	border-color:#6C92AD;
+	background-color:#F6F9FC;
+
+}
+.gSys-msg-win .ft .sup {
+color:#565656;
+float:left;
+line-height:20px;
+padding-top:10px;
+white-space:nowrap;
+}
+.gSys-msg-win .ft .opt {
+float:right;
+margin-top:9px;
+white-space:nowrap;
+}
+.gSys-msg-win .ft .opt .btn {
+margin-left:8px;
+}
+.gSys-msg-win .ft .opt .btn span {
+padding-left:18px;
+padding-right:14px;
+}
+.btnspan
+{
+	background: url(bg.png) no-repeat -359px 0;
+	line-height:15px;
+	margin-right:3px;
+	padding:4px 9px 5px 12px;
+	cursor:pointer;
+	overflow:hidden;
+	text-align:center;
+	white-space:nowrap;
+	-moz-box-align:center;
+	display:inline-block;
+	vertical-align:middle;
+}
+.btn
+{
+	background: url(bg.png) no-repeat;
+	margin-left:8px;
+	border:0 none;
+	color:#000000;
+	height:24px;
+	margin:0;
+	overflow:hidden;
+	padding:0;
+	text-decoration:none;
+	text-align:center;
+	white-space:nowrap;
+	-moz-box-align:center;
+	display:inline-block;
+	vertical-align:middle;
+}
+.btn-dft
+{
+	background-position:100% -24px;	
+}
+.btn-dft-hover  span
+{
+		background-position: -359px -48px;
+}
+.btn-dft-active  span
+{
+	background-position: -359px 0;	
+}

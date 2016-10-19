@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.padad.outside.mapper.UserinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.padad.outside.pojo.Userinfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="userphone" property="userphone" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="usernick" property="usernick" jdbcType="VARCHAR" />
+    <result column="usersex" property="usersex" jdbcType="INTEGER" />
+    <result column="mailbox" property="mailbox" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="BIGINT" />
+    <result column="register_time" property="registerTime" jdbcType="VARCHAR" />
+    <result column="last_time" property="lastTime" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, username, userphone, password, usernick, usersex, mailbox, role, register_time, 
+    last_time, userid, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.padad.outside.pojo.UserinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from userinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from userinfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from userinfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.padad.outside.pojo.UserinfoExample" >
+    delete from userinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.padad.outside.pojo.Userinfo" >
+    insert into userinfo (id, username, userphone, 
+      password, usernick, usersex, 
+      mailbox, role, register_time, 
+      last_time, userid, status
+      )
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{userphone,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{usernick,jdbcType=VARCHAR}, #{usersex,jdbcType=INTEGER}, 
+      #{mailbox,jdbcType=VARCHAR}, #{role,jdbcType=BIGINT}, #{registerTime,jdbcType=VARCHAR}, 
+      #{lastTime,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.padad.outside.pojo.Userinfo" >
+    insert into userinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="userphone != null" >
+        userphone,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="usernick != null" >
+        usernick,
+      </if>
+      <if test="usersex != null" >
+        usersex,
+      </if>
+      <if test="mailbox != null" >
+        mailbox,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+      <if test="registerTime != null" >
+        register_time,
+      </if>
+      <if test="lastTime != null" >
+        last_time,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null" >
+        #{userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="usernick != null" >
+        #{usernick,jdbcType=VARCHAR},
+      </if>
+      <if test="usersex != null" >
+        #{usersex,jdbcType=INTEGER},
+      </if>
+      <if test="mailbox != null" >
+        #{mailbox,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=BIGINT},
+      </if>
+      <if test="registerTime != null" >
+        #{registerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null" >
+        #{lastTime,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.padad.outside.pojo.UserinfoExample" resultType="java.lang.Integer" >
+    select count(*) from userinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update userinfo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userphone != null" >
+        userphone = #{record.userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usernick != null" >
+        usernick = #{record.usernick,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usersex != null" >
+        usersex = #{record.usersex,jdbcType=INTEGER},
+      </if>
+      <if test="record.mailbox != null" >
+        mailbox = #{record.mailbox,jdbcType=VARCHAR},
+      </if>
+      <if test="record.role != null" >
+        role = #{record.role,jdbcType=BIGINT},
+      </if>
+      <if test="record.registerTime != null" >
+        register_time = #{record.registerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastTime != null" >
+        last_time = #{record.lastTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update userinfo
+    set id = #{record.id,jdbcType=BIGINT},
+      username = #{record.username,jdbcType=VARCHAR},
+      userphone = #{record.userphone,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      usernick = #{record.usernick,jdbcType=VARCHAR},
+      usersex = #{record.usersex,jdbcType=INTEGER},
+      mailbox = #{record.mailbox,jdbcType=VARCHAR},
+      role = #{record.role,jdbcType=BIGINT},
+      register_time = #{record.registerTime,jdbcType=VARCHAR},
+      last_time = #{record.lastTime,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.padad.outside.pojo.Userinfo" >
+    update userinfo
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null" >
+        userphone = #{userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="usernick != null" >
+        usernick = #{usernick,jdbcType=VARCHAR},
+      </if>
+      <if test="usersex != null" >
+        usersex = #{usersex,jdbcType=INTEGER},
+      </if>
+      <if test="mailbox != null" >
+        mailbox = #{mailbox,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=BIGINT},
+      </if>
+      <if test="registerTime != null" >
+        register_time = #{registerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null" >
+        last_time = #{lastTime,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.padad.outside.pojo.Userinfo" >
+    update userinfo
+    set username = #{username,jdbcType=VARCHAR},
+      userphone = #{userphone,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      usernick = #{usernick,jdbcType=VARCHAR},
+      usersex = #{usersex,jdbcType=INTEGER},
+      mailbox = #{mailbox,jdbcType=VARCHAR},
+      role = #{role,jdbcType=BIGINT},
+      register_time = #{registerTime,jdbcType=VARCHAR},
+      last_time = #{lastTime,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

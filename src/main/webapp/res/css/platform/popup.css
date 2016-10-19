@@ -1,0 +1,107 @@
+﻿/*加一个遮罩层的样式*/
+.DialogMask
+{
+    z-index: 998;
+    left: 0px;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    background-color: #000000;
+    filter: alpha(opacity=30);
+    opacity: 0.5;
+}
+/*查询弹出层*/
+body
+{
+    color: #297BB4;
+}
+img
+{
+    border:0px;
+}
+A:link
+{
+    color: #297BB4;
+}
+A:hover
+{
+    color: #297BB4;
+}
+A:visted
+{
+    color: #297BB4;
+}
+A:active
+{
+    color: #297BB4;
+}
+.mod
+{    
+    border: 1px solid #297BB4;
+    background: #fff;
+    z-index: 10001;
+    display: none;
+    position: absolute;    
+}
+.modtag
+{
+    width: 99.9%;
+    height: 28px;
+    line-height: 28px;    
+    font-size: 14px;
+    font-weight: bold;
+    text-indent: 2em;
+    background: #CCE7FF;
+    color: #297BB4;
+    cursor: move;    
+    clear:both;
+}
+.linkclose
+{
+    color: #297BB4;
+    font-size: 13px;
+    margin-right:10px;    
+}
+.closespan
+{
+    vertical-align:middle;    
+    float:right;
+}
+.titlespan
+{
+    float:left;
+}
+/*按钮----------*/
+.button8
+{
+    width: 100%;
+    float: left;
+    text-align: center;
+    padding: 10px 0px 30px 0px;
+}
+.button8 .button
+{
+    height: 22px;
+    width: 60px;
+    background-image: url("../images/anni.jpg");
+    vertical-align: middle;
+    margin-top: 2px;
+    margin-left: 10px;
+    text-align: center;
+    color: #666666;
+    border: 0px;
+    background-repeat: no-repeat;
+}
+
+.popli table
+{
+    border:0px;    
+    height: 100%;
+    width: 100%;    
+}
+.popli td
+{
+    border:0px;
+    padding:2px 0px 2px 0px;    
+}

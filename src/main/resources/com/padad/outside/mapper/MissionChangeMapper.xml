@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.padad.outside.mapper.MissionChangeMapper" >
+  <resultMap id="BaseResultMap" type="com.padad.outside.pojo.MissionChange" >
+    <id column="change_id" property="changeId" jdbcType="VARCHAR" />
+    <result column="gift_title" property="giftTitle" jdbcType="VARCHAR" />
+    <result column="gift_price" property="giftPrice" jdbcType="VARCHAR" />
+    <result column="change_time" property="changeTime" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.padad.outside.pojo.MissionChange" extends="BaseResultMap" >
+    <result column="desc" property="desc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    change_id, gift_title, gift_price, change_time, user_id, number
+  </sql>
+  <sql id="Blob_Column_List" >
+    desc
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.padad.outside.pojo.MissionChangeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mission_change
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.padad.outside.pojo.MissionChangeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mission_change
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mission_change
+    where change_id = #{changeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from mission_change
+    where change_id = #{changeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.padad.outside.pojo.MissionChangeExample" >
+    delete from mission_change
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.padad.outside.pojo.MissionChange" >
+    insert into mission_change (change_id, gift_title, gift_price, 
+      change_time, user_id, number, 
+      desc)
+    values (#{changeId,jdbcType=VARCHAR}, #{giftTitle,jdbcType=VARCHAR}, #{giftPrice,jdbcType=VARCHAR}, 
+      #{changeTime,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
+      #{desc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.padad.outside.pojo.MissionChange" >
+    insert into mission_change
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="changeId != null" >
+        change_id,
+      </if>
+      <if test="giftTitle != null" >
+        gift_title,
+      </if>
+      <if test="giftPrice != null" >
+        gift_price,
+      </if>
+      <if test="changeTime != null" >
+        change_time,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="desc != null" >
+        desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="changeId != null" >
+        #{changeId,jdbcType=VARCHAR},
+      </if>
+      <if test="giftTitle != null" >
+        #{giftTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="giftPrice != null" >
+        #{giftPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="changeTime != null" >
+        #{changeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="desc != null" >
+        #{desc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.padad.outside.pojo.MissionChangeExample" resultType="java.lang.Integer" >
+    select count(*) from mission_change
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update mission_change
+    <set >
+      <if test="record.changeId != null" >
+        change_id = #{record.changeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.giftTitle != null" >
+        gift_title = #{record.giftTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.giftPrice != null" >
+        gift_price = #{record.giftPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.changeTime != null" >
+        change_time = #{record.changeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.desc != null" >
+        desc = #{record.desc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update mission_change
+    set change_id = #{record.changeId,jdbcType=VARCHAR},
+      gift_title = #{record.giftTitle,jdbcType=VARCHAR},
+      gift_price = #{record.giftPrice,jdbcType=VARCHAR},
+      change_time = #{record.changeTime,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      desc = #{record.desc,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update mission_change
+    set change_id = #{record.changeId,jdbcType=VARCHAR},
+      gift_title = #{record.giftTitle,jdbcType=VARCHAR},
+      gift_price = #{record.giftPrice,jdbcType=VARCHAR},
+      change_time = #{record.changeTime,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.padad.outside.pojo.MissionChange" >
+    update mission_change
+    <set >
+      <if test="giftTitle != null" >
+        gift_title = #{giftTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="giftPrice != null" >
+        gift_price = #{giftPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="changeTime != null" >
+        change_time = #{changeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="desc != null" >
+        desc = #{desc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where change_id = #{changeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.padad.outside.pojo.MissionChange" >
+    update mission_change
+    set gift_title = #{giftTitle,jdbcType=VARCHAR},
+      gift_price = #{giftPrice,jdbcType=VARCHAR},
+      change_time = #{changeTime,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      desc = #{desc,jdbcType=LONGVARCHAR}
+    where change_id = #{changeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.padad.outside.pojo.MissionChange" >
+    update mission_change
+    set gift_title = #{giftTitle,jdbcType=VARCHAR},
+      gift_price = #{giftPrice,jdbcType=VARCHAR},
+      change_time = #{changeTime,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER}
+    where change_id = #{changeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

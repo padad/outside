@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.padad.outside.mapper.MissionMytaskMapper" >
+  <resultMap id="BaseResultMap" type="com.padad.outside.pojo.MissionMytask" >
+    <id column="task_id" property="taskId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="mission_id" property="missionId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="money_price" property="moneyPrice" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="mission_star" property="missionStar" jdbcType="INTEGER" />
+    <result column="mission_time" property="missionTime" jdbcType="VARCHAR" />
+    <result column="movie_url" property="movieUrl" jdbcType="VARCHAR" />
+    <result column="mission_content" property="missionContent" jdbcType="VARCHAR" />
+    <result column="kind_title" property="kindTitle" jdbcType="VARCHAR" />
+    <result column="dole" property="dole" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.padad.outside.pojo.MissionMytask" extends="BaseResultMap" >
+    <result column="mission_step" property="missionStep" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    task_id, user_id, mission_id, status, money_price, type, mission_star, mission_time, 
+    movie_url, mission_content, kind_title, dole
+  </sql>
+  <sql id="Blob_Column_List" >
+    mission_step
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.padad.outside.pojo.MissionMytaskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mission_mytask
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.padad.outside.pojo.MissionMytaskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mission_mytask
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mission_mytask
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from mission_mytask
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.padad.outside.pojo.MissionMytaskExample" >
+    delete from mission_mytask
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.padad.outside.pojo.MissionMytask" >
+    insert into mission_mytask (task_id, user_id, mission_id, 
+      status, money_price, type, 
+      mission_star, mission_time, movie_url, 
+      mission_content, kind_title, dole, 
+      mission_step)
+    values (#{taskId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{missionId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{moneyPrice,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{missionStar,jdbcType=INTEGER}, #{missionTime,jdbcType=VARCHAR}, #{movieUrl,jdbcType=VARCHAR}, 
+      #{missionContent,jdbcType=VARCHAR}, #{kindTitle,jdbcType=VARCHAR}, #{dole,jdbcType=INTEGER}, 
+      #{missionStep,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.padad.outside.pojo.MissionMytask" >
+    insert into mission_mytask
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="missionId != null" >
+        mission_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="moneyPrice != null" >
+        money_price,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="missionStar != null" >
+        mission_star,
+      </if>
+      <if test="missionTime != null" >
+        mission_time,
+      </if>
+      <if test="movieUrl != null" >
+        movie_url,
+      </if>
+      <if test="missionContent != null" >
+        mission_content,
+      </if>
+      <if test="kindTitle != null" >
+        kind_title,
+      </if>
+      <if test="dole != null" >
+        dole,
+      </if>
+      <if test="missionStep != null" >
+        mission_step,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="taskId != null" >
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="missionId != null" >
+        #{missionId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="moneyPrice != null" >
+        #{moneyPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="missionStar != null" >
+        #{missionStar,jdbcType=INTEGER},
+      </if>
+      <if test="missionTime != null" >
+        #{missionTime,jdbcType=VARCHAR},
+      </if>
+      <if test="movieUrl != null" >
+        #{movieUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="missionContent != null" >
+        #{missionContent,jdbcType=VARCHAR},
+      </if>
+      <if test="kindTitle != null" >
+        #{kindTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="dole != null" >
+        #{dole,jdbcType=INTEGER},
+      </if>
+      <if test="missionStep != null" >
+        #{missionStep,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.padad.outside.pojo.MissionMytaskExample" resultType="java.lang.Integer" >
+    select count(*) from mission_mytask
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update mission_mytask
+    <set >
+      <if test="record.taskId != null" >
+        task_id = #{record.taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.missionId != null" >
+        mission_id = #{record.missionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.moneyPrice != null" >
+        money_price = #{record.moneyPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.missionStar != null" >
+        mission_star = #{record.missionStar,jdbcType=INTEGER},
+      </if>
+      <if test="record.missionTime != null" >
+        mission_time = #{record.missionTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.movieUrl != null" >
+        movie_url = #{record.movieUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.missionContent != null" >
+        mission_content = #{record.missionContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kindTitle != null" >
+        kind_title = #{record.kindTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dole != null" >
+        dole = #{record.dole,jdbcType=INTEGER},
+      </if>
+      <if test="record.missionStep != null" >
+        mission_step = #{record.missionStep,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update mission_mytask
+    set task_id = #{record.taskId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      mission_id = #{record.missionId,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      money_price = #{record.moneyPrice,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      mission_star = #{record.missionStar,jdbcType=INTEGER},
+      mission_time = #{record.missionTime,jdbcType=VARCHAR},
+      movie_url = #{record.movieUrl,jdbcType=VARCHAR},
+      mission_content = #{record.missionContent,jdbcType=VARCHAR},
+      kind_title = #{record.kindTitle,jdbcType=VARCHAR},
+      dole = #{record.dole,jdbcType=INTEGER},
+      mission_step = #{record.missionStep,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update mission_mytask
+    set task_id = #{record.taskId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      mission_id = #{record.missionId,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      money_price = #{record.moneyPrice,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      mission_star = #{record.missionStar,jdbcType=INTEGER},
+      mission_time = #{record.missionTime,jdbcType=VARCHAR},
+      movie_url = #{record.movieUrl,jdbcType=VARCHAR},
+      mission_content = #{record.missionContent,jdbcType=VARCHAR},
+      kind_title = #{record.kindTitle,jdbcType=VARCHAR},
+      dole = #{record.dole,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.padad.outside.pojo.MissionMytask" >
+    update mission_mytask
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="missionId != null" >
+        mission_id = #{missionId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="moneyPrice != null" >
+        money_price = #{moneyPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="missionStar != null" >
+        mission_star = #{missionStar,jdbcType=INTEGER},
+      </if>
+      <if test="missionTime != null" >
+        mission_time = #{missionTime,jdbcType=VARCHAR},
+      </if>
+      <if test="movieUrl != null" >
+        movie_url = #{movieUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="missionContent != null" >
+        mission_content = #{missionContent,jdbcType=VARCHAR},
+      </if>
+      <if test="kindTitle != null" >
+        kind_title = #{kindTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="dole != null" >
+        dole = #{dole,jdbcType=INTEGER},
+      </if>
+      <if test="missionStep != null" >
+        mission_step = #{missionStep,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.padad.outside.pojo.MissionMytask" >
+    update mission_mytask
+    set user_id = #{userId,jdbcType=VARCHAR},
+      mission_id = #{missionId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      money_price = #{moneyPrice,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      mission_star = #{missionStar,jdbcType=INTEGER},
+      mission_time = #{missionTime,jdbcType=VARCHAR},
+      movie_url = #{movieUrl,jdbcType=VARCHAR},
+      mission_content = #{missionContent,jdbcType=VARCHAR},
+      kind_title = #{kindTitle,jdbcType=VARCHAR},
+      dole = #{dole,jdbcType=INTEGER},
+      mission_step = #{missionStep,jdbcType=LONGVARCHAR}
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.padad.outside.pojo.MissionMytask" >
+    update mission_mytask
+    set user_id = #{userId,jdbcType=VARCHAR},
+      mission_id = #{missionId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      money_price = #{moneyPrice,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      mission_star = #{missionStar,jdbcType=INTEGER},
+      mission_time = #{missionTime,jdbcType=VARCHAR},
+      movie_url = #{movieUrl,jdbcType=VARCHAR},
+      mission_content = #{missionContent,jdbcType=VARCHAR},
+      kind_title = #{kindTitle,jdbcType=VARCHAR},
+      dole = #{dole,jdbcType=INTEGER}
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </update>
+</mapper>
