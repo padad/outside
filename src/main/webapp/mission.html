@@ -24,12 +24,13 @@
         <th field="taskName" width="20">任务名</th>
         <th field="missionStar" width="20">难度</th>
         <th field="missionTime" width="40">任务时间</th>
+        <th field="missionEnd" width="40">结束时间</th>
         <th field="moneyPrice" width="30">金额</th>
-        <th field="active" width="10">激活</th>
         <th field="missionContent" width="30">描述</th>
         <th field="taskApi" width="30">第三发接口</th>
         <th field="movieUrl" width="30">影片,app地址</th>
         <th field="kindTitle" width="30">类型</th>
+        <th field="active" width="10" formatter="formatStatus">激活</th>
     </tr>
     </thead>
 </table>
@@ -50,6 +51,10 @@
     <div class="ftitle">编辑任务信息</div>
     <form id="fm" method="post" novalidate>
         <div class="fitem">
+            <label>编号:</label>
+            <input name="missionId" id="mission_id" class="easyui-textbox" required="true">
+        </div>
+        <div class="fitem">
             <label>任务名:</label>
             <input name="taskName" class="easyui-textbox" required="true">
         </div>
@@ -63,7 +68,7 @@
         </div>
         <div class="fitem">
             <label>结束时间:</label>
-            <input name="missionEndTime" class="easyui-datetimebox" required="true">
+            <input name="missionEnd" class="easyui-datetimebox" required="true">
         </div>
 
         <div class="fitem">
@@ -71,16 +76,22 @@
             <input name="moneyPrice" class="easyui-textbox">
         </div>
         <div class="fitem">
-            <label>第三发接口:</label>
+            <label>第三方接口:</label>
             <input name="taskApi"  class="easyui-textbox">
         </div>
         <div class="fitem">
+            <label>描述:</label>
+            <input name="missionContent"  class="easyui-textbox">
+        </div>
+        <div class="fitem">
             <label>影片App地址:</label>
-            <input name="movieUrl" class="easyui-datetimebox">
+            <input name="movieUrl" class="easyui-textbox">
         </div>
         <div class="fitem">
             <label>类型:</label>
-            <input name="kindTitle" class="easyui-textbox">
+            <input name="type" class="easyui-combobox" valueField="id" url="json/task_type.json"
+                   textField="text"
+                   panelHeight="auto">
         </div>
 
         <div class="fitem">
@@ -102,7 +113,7 @@
     function newTask(){
         $('#dlg').dialog('open').dialog('center').dialog('setTitle','添加任务');
         $('#fm').form('clear');
-
+        $("#mission_id").datebox('disable');
         // .$("#registerTime").attr('readonly',true);
         url = 'task/save_task.do';
     }
@@ -184,6 +195,15 @@
         }
     }
 
+    function formatStatus(val,row){
+        if (val==1){
+            return '<span style="color:green;">启用中</span>';
+        }
+        else{
+            return '<span style="color:red;">禁用中</span>';
+        }
+
+    }
 
     function formatDate(val, row) {
 

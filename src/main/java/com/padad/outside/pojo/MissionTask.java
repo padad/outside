@@ -23,6 +23,16 @@ public class MissionTask {
 
     private String kindTitle;
 
+    private String missionEnd;
+
+    public String getMissionEnd() {
+        return missionEnd;
+    }
+
+    public void setMissionEnd(String missionEnd) {
+        this.missionEnd = missionEnd;
+    }
+
     public String getMissionId() {
         return missionId;
     }

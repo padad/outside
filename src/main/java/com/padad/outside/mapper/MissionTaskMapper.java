@@ -15,6 +15,8 @@ public interface MissionTaskMapper {
 
     int insert(MissionTaskWithBLOBs record);
 
+    int insertTask(MissionTask record);
+
     int insertSelective(MissionTaskWithBLOBs record);
 
     List<MissionTaskWithBLOBs> selectByExampleWithBLOBs(MissionTaskExample example);
@@ -34,4 +36,11 @@ public interface MissionTaskMapper {
     int updateByPrimaryKeyWithBLOBs(MissionTaskWithBLOBs record);
 
     int updateByPrimaryKey(MissionTask record);
+
+
+    List queryAllTask(int page,int row);
+
+    List queryTaskByName(String taskName);
+
+    int countBySql();
 }

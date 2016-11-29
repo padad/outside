@@ -7,6 +7,7 @@
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="mission_star" property="missionStar" jdbcType="INTEGER" />
     <result column="mission_time" property="missionTime" jdbcType="VARCHAR" />
+    <result column="mission_end" property="missionEnd" jdbcType="VARCHAR" />
     <result column="money_price" property="moneyPrice" jdbcType="VARCHAR" />
     <result column="active" property="active" jdbcType="INTEGER" />
     <result column="mission_content" property="missionContent" jdbcType="VARCHAR" />
@@ -77,7 +78,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    mission_id, task_name, type, mission_star, mission_time, money_price, active, mission_content, 
+    mission_id, task_name, type, mission_star, mission_time,mission_end, money_price, active, mission_content,
     task_api, movie_url, kind_title
   </sql>
   <sql id="Blob_Column_List" >
@@ -121,6 +122,28 @@
     from mission_task
     where mission_id = #{missionId,jdbcType=VARCHAR}
   </select>
+
+  <select id="queryAllTask" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from mission_task
+    limit  #{0} , #{1}
+  </select>
+
+  <select id="countBySql" parameterType="java.lang.String" resultType="java.lang.Integer" >
+    select count(*) from mission_task
+
+  </select>
+
+  <select id="queryTaskByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from mission_task
+    where task_name = #{taskName,jdbcType=VARCHAR}
+  </select>
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from mission_task
     where mission_id = #{missionId,jdbcType=VARCHAR}
@@ -131,6 +154,16 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+  <insert id="insertTask" parameterType="com.padad.outside.pojo.MissionTask" >
+    insert into mission_task (mission_id, task_name, type,
+    mission_star, mission_time, money_price,
+    active, mission_content, task_api,
+    movie_url, kind_title,mission_end)
+    values (#{missionId,jdbcType=VARCHAR}, #{taskName,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
+    #{missionStar,jdbcType=INTEGER}, #{missionTime,jdbcType=VARCHAR}, #{moneyPrice,jdbcType=VARCHAR},
+    #{active,jdbcType=INTEGER}, #{missionContent,jdbcType=VARCHAR}, #{taskApi,jdbcType=VARCHAR},
+    #{movieUrl,jdbcType=VARCHAR}, #{kindTitle,jdbcType=VARCHAR},#{missionEnd,jdbcType=VARCHAR})
+  </insert>
   <insert id="insert" parameterType="com.padad.outside.pojo.MissionTaskWithBLOBs" >
     insert into mission_task (mission_id, task_name, type, 
       mission_star, mission_time, money_price, 
@@ -376,17 +409,47 @@
     where mission_id = #{missionId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.padad.outside.pojo.MissionTask" >
+
+
     update mission_task
-    set task_name = #{taskName,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
-      mission_star = #{missionStar,jdbcType=INTEGER},
-      mission_time = #{missionTime,jdbcType=VARCHAR},
-      money_price = #{moneyPrice,jdbcType=VARCHAR},
-      active = #{active,jdbcType=INTEGER},
-      mission_content = #{missionContent,jdbcType=VARCHAR},
-      task_api = #{taskApi,jdbcType=VARCHAR},
-      movie_url = #{movieUrl,jdbcType=VARCHAR},
-      kind_title = #{kindTitle,jdbcType=VARCHAR}
+    <set >
+      <if test="taskName != null" >
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="missionStar != null" >
+        mission_star = #{missionStar,jdbcType=INTEGER},
+      </if>
+      <if test="missionTime != null" >
+        mission_time = #{missionTime,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyPrice != null" >
+        money_price = #{moneyPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null" >
+        active = #{active,jdbcType=INTEGER},
+      </if>
+      <if test="missionContent != null" >
+        mission_content = #{missionContent,jdbcType=VARCHAR},
+      </if>
+      <if test="taskApi != null" >
+        task_api = #{taskApi,jdbcType=VARCHAR},
+      </if>
+      <if test="movieUrl != null" >
+        movie_url = #{movieUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="kindTitle != null" >
+        kind_title = #{kindTitle,jdbcType=VARCHAR},
+      </if>
+
+      <if test="missionEnd != null" >
+        mission_end = #{missionEnd,jdbcType=VARCHAR},
+      </if>
+
+    </set>
     where mission_id = #{missionId,jdbcType=VARCHAR}
+
   </update>
 </mapper>
