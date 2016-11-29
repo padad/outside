@@ -77,6 +77,31 @@ public class UserInfoController extends BaseController{
         return cj;
     }
 
+    @RequestMapping(value="/search.do")
+    public @ResponseBody
+    CommonList searchUser(String username)throws Exception
+    {
+        UserRecord<MissionUserinfo> ur = userInfoService.queryUserByName(username);
+        int total = ur.getCount();
+        List<MissionUserinfo> list = ur.getUserInfo();
+        CommonList cj = new CommonList();
+        try
+        {
+            cj.setRows(list);
+
+            cj.setTotal(total);
+
+
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return cj;
+    }
+
     /**
      * 查找所用用户控制器方法
      * @return

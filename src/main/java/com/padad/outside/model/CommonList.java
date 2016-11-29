@@ -3,11 +3,11 @@ package com.padad.outside.model;
 import java.util.List;
 
 public class CommonList {
-	private List rows;
-	
-	
-	
-	private int total;
+	public List rows;
+
+
+
+	public int total;
 
 
 

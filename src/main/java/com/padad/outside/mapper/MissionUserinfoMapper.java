@@ -23,9 +23,13 @@ public interface MissionUserinfoMapper {
 
     List queryAllUser(int page,int row);
 
+    List queryUserByName(String username);
+
     List<MissionUserinfo> selectByExample(MissionUserinfoExample example);
 
     MissionUserinfo selectByPrimaryKey(String userId);
+
+
 
     int updateByExampleSelective(@Param("record") MissionUserinfo record, @Param("example") MissionUserinfoExample example);
 

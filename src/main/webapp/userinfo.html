@@ -43,7 +43,8 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">编辑用户</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">删除</a><br/>
     <div style="margin-bottom:10px;margin-top:10px">
-        <input class="easyui-textbox" data-options="iconCls:'icon-search',iconWidth:28,prompt:'Search large...'" style="width:250px;height:26px;">
+        <input id="input_search" class="easyui-textbox" data-options="iconWidth:28,prompt:'用户名'" style="width:250px;height:26px;">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="doSearch()">查询</a>
     </div>
 </div>
 
@@ -136,6 +137,25 @@
             url = 'user/update_user.do?id='+row.userId;
         }
     }
+
+    function doSearch() {
+
+        $.post('user/search.do',{username:$('#input_search').val()},function(cj){
+
+
+            if (cj.total>0){
+                $('#dg').datagrid('reload');    // reload the user data
+                slide('查询成功');
+            } else {
+                $.messager.show({    // show error message
+                    title: '错误',
+                    timeout:3000,
+                    msg: '查无此人'
+                });
+            }
+        },'json');
+    }
+
     function saveUser(){
         $('#fm').form('submit',{
             url: url,

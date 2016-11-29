@@ -66,6 +66,16 @@ public class UserInfoServiceImpl implements UserInfoService {
         return missionUserinfoMapper.queryByName(username);
     }
 
+    public UserRecord queryUserByName(String username) throws Exception {
+        List list = missionUserinfoMapper.queryUserByName(username);
+        UserRecord<MissionUserinfo> userRecord = new UserRecord<MissionUserinfo>();
+        userRecord.setUserInfo(list);
+        userRecord.setCount(list.size());
+        return userRecord;
+
+
+    }
+
     //删除用户
     public int deleteByPrimaryKey(String userId)throws Exception{
         return missionUserinfoMapper.deleteByPrimaryKey(userId);

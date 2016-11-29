@@ -108,6 +108,15 @@
     where username = #{0}
   </select>
 
+  <select id="queryUserByName" parameterType="java.lang.String" resultMap="BaseResultMap" >
+    select <include refid="Base_Column_List" />
+    from mission_userinfo
+
+    where username = #{0}
+  </select>
+
+
+
   <select id="queryAllUser" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />

@@ -29,6 +29,9 @@ public interface UserInfoService {
     //查找用户通过名字
     int queryByName(String username)throws Exception;
 
+    //查找用户通过名字
+    UserRecord queryUserByName(String username) throws Exception;
+
     //删除用户
     int deleteByPrimaryKey(String userid)throws Exception;
 
