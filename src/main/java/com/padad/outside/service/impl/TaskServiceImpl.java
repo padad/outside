@@ -48,6 +48,14 @@ public class TaskServiceImpl implements TaskService {
         return missionTaskMapper.updateByPrimaryKey(missionTask);
     }
 
+    public UserRecord queryAllTaskRecordsByActive() throws Exception {
+        List list = missionTaskMapper.queryTaskByActive(1);
+        UserRecord<MissionTask> userRecord = new UserRecord<MissionTask>();
+        userRecord.setUserInfo(list);
+        userRecord.setCount(list.size());
+        return userRecord;
+    }
+
     public int initTableRows()
     {
 

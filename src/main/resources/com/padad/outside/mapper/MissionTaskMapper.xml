@@ -130,6 +130,15 @@
     limit  #{0} , #{1}
   </select>
 
+  <select id="queryTaskByActive" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from mission_task
+    where active = #{active,jdbcType=INTEGER}
+  </select>
+
+
+
   <select id="countBySql" parameterType="java.lang.String" resultType="java.lang.Integer" >
     select count(*) from mission_task
 

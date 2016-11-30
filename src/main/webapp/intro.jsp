@@ -8,12 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>首页</title>
+    <title>欢迎</title>
 
 </head>
 <body>
     <div>
-        <h1>我是首页</h1>
+        <img src="res/images/welcome_bg.jpg">
     </div>
 </body>
 </html>

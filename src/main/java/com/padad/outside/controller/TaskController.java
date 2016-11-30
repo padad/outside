@@ -63,6 +63,29 @@ public class TaskController extends BaseController{
         return cj;
     }
 
+    /**
+     * 获取任务列表
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value="/taskListAllByActive.do")
+    public @ResponseBody
+    List<MissionTask> taskListByActive(HttpServletRequest request)throws Exception
+    {
+        UserRecord<MissionTask> ur = taskService.queryAllTaskRecordsByActive();
+
+
+        List<MissionTask> list = ur.getUserInfo();
+
+
+        return list;
+    }
+
+
+
+
+
     @RequestMapping(value="/searchTask.do")
     public @ResponseBody
     CommonList searchUser(String taskName)throws Exception

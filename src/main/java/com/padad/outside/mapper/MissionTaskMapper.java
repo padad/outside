@@ -37,6 +37,7 @@ public interface MissionTaskMapper {
 
     int updateByPrimaryKey(MissionTask record);
 
+    List queryTaskByActive(int active);
 
     List queryAllTask(int page,int row);
 

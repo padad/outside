@@ -21,4 +21,8 @@ public interface TaskService {
     //编辑用户,逻辑删除
     int updateByPrimaryKey(MissionTask missionTask) throws Exception;
 
+
+    //查找所有激活任务
+    UserRecord queryAllTaskRecordsByActive()throws Exception;
+
 }

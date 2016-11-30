@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.padad.outside.mapper.MissionStepsMapper" >
+    <resultMap id="BaseResultMap" type="com.padad.outside.pojo.MissionSteps" >
+        <id column="step_id" property="stepId" jdbcType="VARCHAR" />
+        <result column="step_one" property="stepOne" jdbcType="VARCHAR" />
+        <result column="step_two" property="stepTwo" jdbcType="VARCHAR" />
+        <result column="step_thr" property="stepThr" jdbcType="VARCHAR" />
+        <result column="step_four" property="stepFour" jdbcType="VARCHAR" />
+        <result column="step_five" property="stepFive" jdbcType="VARCHAR" />
+        <result column="step_six" property="stepSix" jdbcType="VARCHAR" />
+        <result column="step_seven" property="stepSeven" jdbcType="VARCHAR" />
+        <result column="step_eight" property="stepEight" jdbcType="VARCHAR" />
+        <result column="step_nine" property="stepNine" jdbcType="VARCHAR" />
+        <result column="mission_id" property="missionId" jdbcType="VARCHAR" />
+        <result column="task_name" property="taskName" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        step_id, step_one, step_two, step_thr, step_four, step_five, step_six, step_seven, step_eight,
+        step_nine, mission_id, task_name
+    </sql>
+
+    <select id="queryStepByName" parameterType="java.lang.String" resultMap="BaseResultMap" >
+        select <include refid="Base_Column_List" />
+        from mission_steps
+
+        where task_name = #{0}
+    </select>
+
+    <select id="queryTaskByMissionId" parameterType="java.lang.String" resultMap="BaseResultMap" >
+        select <include refid="Base_Column_List" />
+        from mission_steps
+
+        where mission_id = #{0}
+    </select>
+
+    <select id="queryAllStep" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from mission_steps
+        limit  #{0} , #{1}
+    </select>
+
+    <select id="countBySql" parameterType="java.lang.String" resultType="java.lang.Integer" >
+        select count(*) from mission_steps
+
+    </select>
+
+    <insert id="insertStep" parameterType="com.padad.outside.pojo.MissionSteps" >
+        insert into mission_steps (step_id, step_one, step_two,
+         step_thr, step_four,
+        step_five, step_six, step_seven,
+        step_eight, step_nine, mission_id,
+        task_name)
+        values (#{stepId,jdbcType=VARCHAR}, #{stepOne,jdbcType=VARCHAR}, #{stepTwo,jdbcType=VARCHAR},
+        #{stepThr,jdbcType=VARCHAR}, #{stepFour,jdbcType=VARCHAR},
+        #{stepFive,jdbcType=VARCHAR}, #{stepSix,jdbcType=VARCHAR}, #{stepSeven,jdbcType=VARCHAR},
+        #{stepEight,jdbcType=VARCHAR}, #{stepNine,jdbcType=VARCHAR}, #{missionId,jdbcType=VARCHAR},
+        #{taskName,jdbcType=VARCHAR})
+    </insert>
+
+    <delete id="delStep" parameterType="java.lang.String" >
+        delete from mission_steps
+        where step_id = #{stepId,jdbcType=VARCHAR}
+    </delete>
+
+
+
+    <update id="updateByPrimaryKey" parameterType="com.padad.outside.pojo.MissionSteps" >
+        update mission_steps
+        <set >
+
+            <if test="stepOne != null" >
+                step_one = #{stepOne,jdbcType=VARCHAR},
+            </if>
+            <if test="stepTwo != null" >
+                step_two = #{stepTwo,jdbcType=VARCHAR},
+            </if>
+            <if test="stepThr != null" >
+                step_thr = #{stepThr,jdbcType=VARCHAR},
+            </if>
+            <if test="stepFour != null" >
+                step_four = #{stepFour,jdbcType=VARCHAR},
+            </if>
+            <if test="stepFive != null" >
+                step_five = #{stepFive,jdbcType=VARCHAR},
+            </if>
+            <if test="stepSix != null" >
+                step_six = #{stepSix,jdbcType=VARCHAR},
+            </if>
+            <if test="stepSeven != null" >
+                step_seven = #{stepSeven,jdbcType=VARCHAR},
+            </if>
+            <if test="stepEight != null" >
+                step_eight = #{stepEight,jdbcType=VARCHAR},
+            </if>
+            <if test="stepNine != null" >
+                step_nine = #{stepNine,jdbcType=VARCHAR},
+            </if>
+
+
+        </set>
+        where  step_id = #{stepId,jdbcType=VARCHAR}
+    </update>
+
+</mapper>
