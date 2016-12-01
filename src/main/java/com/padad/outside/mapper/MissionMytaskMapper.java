@@ -33,4 +33,8 @@ public interface MissionMytaskMapper {
     int updateByPrimaryKeyWithBLOBs(MissionMytask record);
 
     int updateByPrimaryKey(MissionMytask record);
+
+    List queryAllMyTask(int page,int row);
+
+    int countBySql();
 }
