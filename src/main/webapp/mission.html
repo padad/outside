@@ -128,11 +128,27 @@
 
     function doSearchTask() {
 
+
+//        $('#dg').datagrid('load', {
+//
+//            taskName: $('#input_search').val()
+//
+//        });
+
+//        $('#dg').datagrid('reload',{
+//            url: 'task/searchTask.do',
+//            queryParams: { taskName:$('#input_search').val()},
+//            method: "post"
+//
+//        });
+
         $.post('task/searchTask.do',{taskName:$('#input_search').val()},function(cj){
 
 
             if (cj.total>0){
-                $('#dg').datagrid('reload');    // reload the user data
+
+                $('#dg').datagrid('loadData', { total: 0, rows: [] });
+                $('#dg').datagrid('loadData',cj);    // reload the user data
                 slide('查询成功');
             } else {
                 $.messager.show({    // show error message
