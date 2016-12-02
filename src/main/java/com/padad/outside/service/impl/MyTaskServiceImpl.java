@@ -30,6 +30,11 @@ public class MyTaskServiceImpl implements MyTaskService {
 
     public UserRecord queryMyTaskByModel(TaskSearchModel taskSearchModel) throws Exception {
 
+        int page = taskSearchModel.getPage();
+        int rows = taskSearchModel.getRow();
+        taskSearchModel.setPage((page-1)*rows);
+        taskSearchModel.setRow(page*rows-1);
+
         List list = missionMytaskMapper.queryAllMyTaskByModel(taskSearchModel);
 
         UserRecord<MissionMytask> userRecord = new UserRecord<MissionMytask>();
