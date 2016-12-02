@@ -64,13 +64,13 @@ public class MyTaskController extends BaseController {
     }
 
     /**
-     * 编辑我的任务
+     * 审核任务是否通过
      * @param
      * @return
      */
     @RequestMapping(value="/update_mytask.do")
     public @ResponseBody
-    Map editTask(HttpServletRequest rsq, MissionMytask missionMytask)throws Exception {
+    Map editTask(HttpServletRequest rsq, String id) {
 
 //        MissionTask missionTask = new MissionTask();
 //        missionTask.setMissionId(id);
@@ -83,9 +83,18 @@ public class MyTaskController extends BaseController {
             result.put("errorMsg", "权限不足。");
             return result;
         }
+        int flag = 0;
+        MissionMytask missionMytask = new MissionMytask();
+        missionMytask.setTaskId(id);
+        missionMytask.setStatus(0);
 
-
-        int flag = myTaskService.updateByModel(missionMytask);
+        try {
+            flag = myTaskService.updateByModel(missionMytask);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            result.put("errorMsg", "审核失败。"+ e.getMessage());
+        }
 
         if (flag>0)
         {
@@ -94,7 +103,7 @@ public class MyTaskController extends BaseController {
         else
         {
 
-            result.put("errorMsg", "添加失败。");
+
 
             result.put("failure", true);
 

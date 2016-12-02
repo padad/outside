@@ -34,6 +34,8 @@ public interface MissionMytaskMapper {
 
     int updateByPrimaryKey(MissionMytask record);
 
+    int updateByModel(MissionMytask record);
+
     List queryAllMyTask(int page,int row);
 
     int countBySql();

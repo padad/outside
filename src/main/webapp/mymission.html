@@ -109,7 +109,7 @@
     </form>
 </div>
 <div id="dlg-buttons">
-    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveMyTask()" style="width:90px">确认完成</a>
+    <a href="javascript:void(0)" id="check_task" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveMyTask()" style="width:90px">审核</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
 </div>
 
@@ -136,6 +136,12 @@
         $("#kindtitle").datebox('disable');
         $("#dole").datebox('disable');
         $("#status").datebox('disable');
+        $("#check_task").linkbutton('disable');
+        var stat = row.status;
+        if (stat==2){
+            $("#check_task").linkbutton('enable');
+        }
+
         if (row){
             $('#dlg').dialog('open').dialog('center').dialog('setTitle','编辑');
             $('#fm').form('load',row);

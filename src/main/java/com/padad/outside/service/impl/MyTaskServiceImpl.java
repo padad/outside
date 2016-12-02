@@ -32,7 +32,7 @@ public class MyTaskServiceImpl implements MyTaskService {
     }
 
     public int updateByModel(MissionMytask missionMytask) throws Exception {
-        return 0;
+        return missionMytaskMapper.updateByModel(missionMytask);
     }
 
     public int initTableRows()

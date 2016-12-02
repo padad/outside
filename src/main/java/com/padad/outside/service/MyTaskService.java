@@ -15,7 +15,7 @@ public interface MyTaskService {
     //查找我的任务
     UserRecord queryMyTaskByModel(MissionMytask missionMytask) throws  Exception;
 
-    //编辑我的任务
+    //审核的任务
     int updateByModel(MissionMytask missionMytask) throws Exception;
 
 

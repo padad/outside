@@ -390,6 +390,52 @@
       mission_step = #{missionStep,jdbcType=LONGVARCHAR}
     where task_id = #{taskId,jdbcType=VARCHAR}
   </update>
+
+
+  <update id="updateByModel" parameterType="com.padad.outside.pojo.MissionMytask" >
+    update mission_mytask
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="missionId != null" >
+        mission_id = #{missionId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="moneyPrice != null" >
+        money_price = #{moneyPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="missionStar != null" >
+        mission_star = #{missionStar,jdbcType=INTEGER},
+      </if>
+      <if test="missionTime != null" >
+        mission_time = #{missionTime,jdbcType=VARCHAR},
+      </if>
+      <if test="movieUrl != null" >
+        movie_url = #{movieUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="missionContent != null" >
+        mission_content = #{missionContent,jdbcType=VARCHAR},
+      </if>
+      <if test="kindTitle != null" >
+        kind_title = #{kindTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="dole != null" >
+        dole = #{dole,jdbcType=INTEGER},
+      </if>
+      <if test="missionStep != null" >
+        mission_step = #{missionStep,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </update>
+
+
   <update id="updateByPrimaryKey" parameterType="com.padad.outside.pojo.MissionMytask" >
     update mission_mytask
     set user_id = #{userId,jdbcType=VARCHAR},
