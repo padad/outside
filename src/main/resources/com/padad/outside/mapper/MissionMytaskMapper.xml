@@ -130,9 +130,39 @@
     limit  #{0} , #{1}
   </select>
 
+  <select id="queryAllMyTaskByModel" resultMap="BaseResultMap" parameterType="com.padad.outside.model.TaskSearchModel" >
+    select
+    <include refid="Base_Column_List" />
+    from mission_mytask
+
+    <where>
+
+      1=1
+      <if test="mytaskid != null and mytaskid!='' " >
+        and task_id = #{mytaskid,jdbcType=VARCHAR}
+      </if>
+      <if test="userid != null and userid!='' " >
+        and user_id = #{userid,jdbcType=VARCHAR}
+      </if>
+      <if test="missionid != null and missionid!='' " >
+        and mission_id = #{missionid,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null and status!='' " >
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+    </where>
+
+     limit  #{page,jdbcType=INTEGER} , #{row,jdbcType=INTEGER}
+  </select>
+
   <select id="countBySql" parameterType="java.lang.String" resultType="java.lang.Integer" >
     select count(*) from mission_mytask
 
+  </select>
+
+  <select id="countBySqlByStatus" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+    select count(*) from mission_mytask
+    where status = #{0}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >

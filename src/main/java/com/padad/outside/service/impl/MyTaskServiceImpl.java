@@ -1,6 +1,7 @@
 package com.padad.outside.service.impl;
 
 import com.padad.outside.mapper.MissionMytaskMapper;
+import com.padad.outside.model.TaskSearchModel;
 import com.padad.outside.model.UserRecord;
 import com.padad.outside.pojo.MissionMytask;
 import com.padad.outside.pojo.MissionTask;
@@ -27,8 +28,14 @@ public class MyTaskServiceImpl implements MyTaskService {
         return userRecord;
     }
 
-    public UserRecord queryMyTaskByModel(MissionMytask missionMytask) throws Exception {
-        return null;
+    public UserRecord queryMyTaskByModel(TaskSearchModel taskSearchModel) throws Exception {
+
+        List list = missionMytaskMapper.queryAllMyTaskByModel(taskSearchModel);
+
+        UserRecord<MissionMytask> userRecord = new UserRecord<MissionMytask>();
+        userRecord.setUserInfo(list);
+        userRecord.setCount(initTableRowsByStatus(taskSearchModel.getStatus()));
+        return userRecord;
     }
 
     public int updateByModel(MissionMytask missionMytask) throws Exception {
@@ -40,6 +47,15 @@ public class MyTaskServiceImpl implements MyTaskService {
 
         int sum = 0;
         sum = missionMytaskMapper.countBySql();
+
+        return sum;
+    }
+
+    public int initTableRowsByStatus(int status)
+    {
+
+        int sum = 0;
+        sum = missionMytaskMapper.countBySqlByStatus(status);
 
         return sum;
     }

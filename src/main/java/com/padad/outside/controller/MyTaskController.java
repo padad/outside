@@ -1,9 +1,11 @@
 package com.padad.outside.controller;
 
 import com.padad.outside.model.CommonList;
+import com.padad.outside.model.TaskSearchModel;
 import com.padad.outside.model.UserRecord;
 import com.padad.outside.pojo.MissionMytask;
 import com.padad.outside.pojo.MissionTask;
+import com.padad.outside.pojo.MissionUserinfo;
 import com.padad.outside.service.MyTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,6 +47,45 @@ public class MyTaskController extends BaseController {
 
         int total = ur.getCount();
         List<MissionMytask> list = ur.getUserInfo();
+        CommonList cj = new CommonList();
+        try
+        {
+            cj.setRows(list);
+
+            cj.setTotal(total);
+
+
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return cj;
+    }
+
+
+    @RequestMapping(value="/searchMyTask.do")
+    public @ResponseBody
+    CommonList searchUser(String mytaskid,String userid,String missionid,String stat,HttpServletRequest request)throws Exception
+    {
+
+        TaskSearchModel taskSearchModel = new TaskSearchModel();
+        taskSearchModel.setMytaskid(mytaskid);
+        taskSearchModel.setUserid(userid);
+        taskSearchModel.setMissionid(missionid);
+        taskSearchModel.setStatus(Integer.valueOf(stat));
+
+        int page = request.getParameter("page")==null?1:Integer.valueOf(request.getParameter("page"));
+        int row = request.getParameter("rows")==null?10:Integer.valueOf(request.getParameter("rows"));
+
+        taskSearchModel.setPage(page);
+        taskSearchModel.setRow(row);
+
+        UserRecord<MissionUserinfo> ur = myTaskService.queryMyTaskByModel(taskSearchModel);
+        int total = ur.getCount();
+        List<MissionUserinfo> list = ur.getUserInfo();
         CommonList cj = new CommonList();
         try
         {

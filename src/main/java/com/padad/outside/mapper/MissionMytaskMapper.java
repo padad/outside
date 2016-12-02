@@ -1,5 +1,6 @@
 package com.padad.outside.mapper;
 
+import com.padad.outside.model.TaskSearchModel;
 import com.padad.outside.pojo.MissionMytask;
 import com.padad.outside.pojo.MissionMytaskExample;
 import java.util.List;
@@ -38,5 +39,9 @@ public interface MissionMytaskMapper {
 
     List queryAllMyTask(int page,int row);
 
+    List queryAllMyTaskByModel(TaskSearchModel taskSearchModel);
+
     int countBySql();
+
+    int countBySqlByStatus(int status);
 }

@@ -30,7 +30,7 @@
         <th field="movieUrl" width="40" style="display:none">任务url</th>
         <th field="missionContent" width="50">任务描述</th>
         <th field="kindTitle" width="20" >任务类型</th>
-        <th field="status" width="25">任务状态</th>
+        <th field="status" width="25" formatter="formatTaskStatus">任务状态</th>
         <th field="dole" width="10" formatter="formatStatus">领奖</th>
     </tr>
     </thead>
@@ -44,7 +44,7 @@
         <input id="input_search_mytask_id" class="easyui-textbox" data-options="iconWidth:28,prompt:'我的任务编号'" style="width:70px;height:26px;">
         <input id="input_search_user_id" class="easyui-textbox" data-options="iconWidth:28,prompt:'用户编号'" style="width:70px;height:26px;margin-left: 20px">
         <input id="input_search_mission_id" class="easyui-textbox" data-options="iconWidth:28,prompt:'任务编号'" style="width:70px;height:26px;margin-left: 20px">
-        <input name="input_search_status" class="easyui-combobox" textField="text"
+        <input id="input_search_status" class="easyui-combobox" textField="text"
                panelHeight="auto"  valueField="id" url="json/mytask_status.json" value="4">
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="doSearchMyTask()">查询</a>
     </div>
@@ -153,8 +153,14 @@
 
     function doSearchMyTask() {
 
+//        var a = $('#input_search_mytask_id').val();
+//        var b = $('#input_search_user_id').val();
+//        var c = $('#input_search_mission_id').val();
+//        var d = $("#input_search_status").combobox('getValue')
+
+
         $.post('mytask/searchMyTask.do',{mytaskid:$('#input_search_mytask_id').val(),userid:$('#input_search_user_id').val()
-        ,missionid:$('#input_search_mission_id').val(),status:$("#input_search_status").combobox('getValue')},function(cj){
+        ,missionid:$('#input_search_mission_id').val(),stat:$('#input_search_status').combobox('getValue')},function(cj){
 
 
             if (cj.total>0){
@@ -187,7 +193,7 @@
                 } else {
                     $('#dlg').dialog('close');        // close the dialog
                     $('#dg').datagrid('reload');    // reload the user data
-                    slide('添加成功');
+                    slide('审核成功');
                 }
             }
         });
@@ -227,6 +233,24 @@
         }
         else{
             return '<span style="color:red;">未领取</span>';
+        }
+
+    }
+
+    function formatTaskStatus(val,row){
+        if (val==1){
+            return '<span style="color:green;">进行中</span>';
+        }
+        else if (val==2){
+            return '<span style="color:#f0ad4e;">审核中</span>';
+        }
+
+        else if (val==0){
+            return '<span style="color:brown;">已完成</span>';
+        }
+
+        else if (val==3){
+            return '<span style="color:darkcyan;">已领取</span>';
         }
 
     }
