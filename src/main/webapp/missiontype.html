@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>任务类型</title>
+
+    <link rel="stylesheet" type="text/css" href="res/css/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="res/css/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="res/css/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="res/css/demo/demo.css">
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+
+</head>
+<body>
+<table id="dg" title="任务类型" class="easyui-datagrid" loadMsg="数据装载中......" style="width:100%;height:400px"
+       url="missiontype/missionAllType.do"
+       toolbar="#toolbar" pagination="true"
+       rownumbers="true" fitColumns="true" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="id" width="30">类型编号</th>
+        <th field="type" width="30">任务类型</th>
+        <th field="missionTitle" width="30">类型名称</th>
+    </tr>
+    </thead>
+</table>
+
+<div id="toolbar">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newTask()">新类型</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editTask()">编辑类型</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyTask()">删除类型</a><br/>
+    <div style="margin-bottom:10px;margin-top:10px">
+        <input id="input_search_mytask_id" class="easyui-textbox" data-options="iconWidth:28,prompt:'任务类型'" style="width:70px;height:26px;">
+
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="doSearchType()">查询</a>
+    </div>
+</div>
+
+
+<div id="dlg" class="easyui-dialog" style="padding:10px 20px"
+     closed="true" buttons="#dlg-buttons">
+    <div class="ftitle">编辑我的任务信息</div>
+    <form id="fm" method="post" novalidate>
+        <div class="fitem">
+            <label>编号:</label>
+            <input name="id" id="id" class="easyui-textbox" required="true">
+        </div>
+        <div class="fitem">
+            <label>任务类型:</label>
+            <input name="type" id="type" class="easyui-textbox" required="true">
+        </div>
+        <div class="fitem">
+            <label>类型名称:</label>
+            <input name="missionTitle" id="missionTitle" class="easyui-textbox" required="true">
+        </div>
+
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="javascript:void(0)" id="check_task" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="save()" style="width:90px">完成</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
+</div>
+
+
+<script type="text/javascript">
+    var url;
+        function newTask(){
+            $('#dlg').dialog('open').dialog('center').dialog('setTitle','添加任务');
+            $('#fm').form('clear');
+            $("#id").datebox('disable');
+            // .$("#registerTime").attr('readonly',true);
+            url = 'missiontype/saveType.do';
+        }
+    function editTask(){
+        var row = $('#dg').datagrid('getSelected');
+        $("#id").datebox('disable');
+
+
+
+        if (row){
+            $('#dlg').dialog('open').dialog('center').dialog('setTitle','编辑');
+            $('#fm').form('load',row);
+
+
+            url = 'missiontype/update_type.do?id='+row.id;
+        }
+    }
+
+    function doSearchMyTask() {
+
+
+        $.post('missiontype/searchType.do',{missionTitle:$('#missionTitle').val()},function(cj){
+
+
+            if (cj.total>0){
+                $('#dg').datagrid('loadData',cj);     // reload the user data
+                slide('查询成功');
+            } else {
+                $.messager.show({    // show error message
+                    title: '错误',
+                    timeout:3000,
+                    msg: '查无任务'
+                });
+            }
+        },'json');
+    }
+
+    function saveMyTask(){
+        $('#fm').form('submit',{
+            url: url,
+            onSubmit: function(){
+                return $(this).form('validate');
+            },
+            success: function(result){
+                var result = eval('('+result+')');
+                if (result.errorMsg){
+                    $.messager.show({
+                        title: '错误',
+                        timeout:3000,
+                        msg: result.errorMsg
+                    });
+                } else {
+                    $('#dlg').dialog('close');        // close the dialog
+                    $('#dg').datagrid('reload');    // reload the user data
+                    slide('审核成功');
+                }
+            }
+        });
+    }
+    function destroyTask(){
+        var row = $('#dg').datagrid('getSelected');
+        if (row){
+            $.messager.confirm('确认','确认删除此任务吗?',function(r){
+
+
+                if (r){
+                    $.post('missiontype/destroy_type.do',{id:row.id},function(result){
+                        if (result.success){
+                            $('#dg').datagrid('reload');    // reload the user data
+                            slide('删除成功');
+                        } else {
+                            $.messager.show({    // show error message
+                                title: '错误',
+                                timeout:3000,
+                                msg: result.errorMsg
+                            });
+                        }
+                    },'json');
+                }
+
+
+
+
+
+            });
+        }
+    }
+
+
+
+    function slide(data){
+        jQuery.messager.show({
+            title:'温馨提示:',
+            msg:data,
+            timeout:3000,
+            showType:'slide'
+        });
+    }
+
+
+
+
+
+</script>
+<style type="text/css">
+    #fm{
+        margin:0;
+        padding:10px 30px;
+    }
+    .ftitle{
+        font-size:14px;
+        font-weight:bold;
+        padding:5px 0;
+        margin-bottom:10px;
+        border-bottom:1px solid #ccc;
+    }
+    .fitem{
+        margin-bottom:5px;
+    }
+    .fitem label{
+        display:inline-block;
+        width:80px;
+    }
+    .fitem input{
+        width:160px;
+    }
+</style>
+
+</body>
+</html>

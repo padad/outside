@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>app加固</title>
+
+    <link rel="stylesheet" type="text/css" href="res/css/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="res/css/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="res/css/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="res/css/demo/demo.css">
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="js/ajaxfileupload.js"></script>
+
+
+
+
+</head>
+<body>
+<table id="dg" title="任务信息" class="easyui-datagrid" loadMsg="数据装载中......" style="width:100%;height:400px"
+       url="app/appLists.do"
+       toolbar="#toolbar" pagination="true"
+       rownumbers="true" fitColumns="true" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="missionId" width="10">编号</th>
+        <th field="ver" width="10">加固版本</th>
+        <th field="address_up" width="10">上传地址</th>
+        <th field="download_where" width="10">下载地址</th>
+        <th field="desc" width="10">描述</th>
+        <th field="time" width="10">加固时间</th>
+    </tr>
+    </thead>
+</table>
+
+<div id="toolbar">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newTask()">新加固</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editTask()">编辑加固</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyTask()">删除加固</a><br/>
+    <div style="margin-bottom:10px;margin-top:10px">
+        <input id="input_search" class="easyui-textbox" data-options="iconWidth:28,prompt:'编号'" style="width:250px;height:26px;">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="doSearchTask()">查询</a>
+    </div>
+</div>
+
+
+<div id="dlg" class="easyui-dialog" style="padding:10px 20px"
+     closed="true" buttons="#dlg-buttons">
+    <div class="ftitle">加固信息</div>
+    <form id="fm" method="post" novalidate enctype="multipart/form-data">
+        <div class="fitem">
+            <label>编号:</label>
+            <input name="missionId" id="mission_id" class="easyui-textbox" required="true">
+        </div>
+
+        <div class="fitem">
+            <label>本地APK:</label>
+            <!--<input id="uploadfile" name="uploadfile2" type="file" >-->
+            <input id="uploadfile" name="uploadfile2" class="easyui-filebox">
+            <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="uploadAPK()" style="width:90px">上传</a>
+        </div>
+
+        <div class="fitem">
+            <label>加固版本:</label>
+            <input name="ver" id="ver_id" class="easyui-combobox" valueField="id" url="json/myapp.json"
+                   textField="text"
+                   panelHeight="auto">
+        </div>
+
+        <div class="fitem">
+            <label>上传地址:</label>
+            <input name="address_up" id="address_up" class="easyui-textbox" required="true">
+        </div>
+        <div class="fitem">
+            <label>下载路径:</label>
+            <input name="download_where" id="download_where" class="easyui-textbox" required="true">
+        </div>
+
+
+        <div class="fitem">
+            <label>描述:</label>
+            <input name="desc" id="desc"  class="easyui-textbox">
+        </div>
+
+
+
+
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveTask()" style="width:90px">开始</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
+</div>
+
+<script type="text/javascript">
+    function getFullPath(obj)
+    {
+        if(obj)
+        {
+            //ie
+            if (window.navigator.userAgent.indexOf("MSIE")>=1)
+            {
+                obj.select();
+                return document.selection.createRange().text;
+            }
+            //firefox
+            else if(window.navigator.userAgent.indexOf("Firefox")>=1)
+            {
+                if(obj.files)
+                {
+                    return obj.files.item(0).getAsDataURL();
+                }
+                return obj.value;
+            }
+            return obj.value;
+        }
+    }
+</script>
+
+
+<script type="text/javascript">
+    var url;
+    function newTask(){
+        $('#dlg').dialog('open').dialog('center').dialog('setTitle','添加任务');
+        $('#fm').form('clear');
+        $("#mission_id").datebox('disable');
+        // .$("#registerTime").attr('readonly',true);
+        url = 'app/appSave.do';
+    }
+    function editTask(){
+        var row = $('#dg').datagrid('getSelected');
+        if (row){
+            $('#dlg').dialog('open').dialog('center').dialog('setTitle','编辑');
+            $('#fm').form('load',row);
+            url = 'task/update_task.do?id='+row.missionId;
+        }
+    }
+
+    function doSearchTask() {
+
+
+//        $('#dg').datagrid('load', {
+//
+//            taskName: $('#input_search').val()
+//
+//        });
+
+//        $('#dg').datagrid('reload',{
+//            url: 'task/searchTask.do',
+//            queryParams: { taskName:$('#input_search').val()},
+//            method: "post"
+//
+//        });
+
+        $.post('task/searchTask.do',function(cj){
+
+
+            if (cj.total>0){
+
+                $('#dg').datagrid('loadData', { total: 0, rows: [] });
+                $('#dg').datagrid('loadData',cj);    // reload the user data
+                slide('查询成功');
+            } else {
+                $.messager.show({    // show error message
+                    title: '错误',
+                    timeout:3000,
+                    msg: '查无任务'
+                });
+            }
+        },'json');
+    }
+
+    function saveTask(){
+
+        $('#fm').form('submit',{
+            url: "app/appSave.do",
+            onSubmit: function(){
+                return $(this).form('validate');
+            },
+            success: function(result){
+                var result = eval('('+result+')');
+                if (!result.success){
+                    $.messager.show({
+                        title: '错误',
+                        timeout:3000,
+                        msg: result.errorMsg
+                    });
+                } else {
+                    $('#dlg').dialog('close');        // close the dialog
+                    $('#dg').datagrid('reload');    // reload the user data
+                    slide('添加成功');
+                }
+            }
+        });
+
+//
+       //     $("#fm").attr("action","app/appSave.do").submit();
+//
+//                function(result){
+//                    var result = eval('('+result+')');
+//                    if (result.errorMsg){
+//                        $.messager.show({
+//                            title: '错误',
+//                            timeout:3000,
+//                            msg: result.errorMsg
+//                        });
+//                    } else {
+//                        $('#dlg').dialog('close');        // close the dialog
+//                        $('#dg').datagrid('reload');    // reload the user data
+//                        slide('添加成功');
+//                    }
+//                }
+//
+//            );
+//        $.post('app/appSave.do',function(cj){
+//
+//
+//            if (cj.total>0){
+//
+//                $('#dg').datagrid('loadData', { total: 0, rows: [] });
+//                $('#dg').datagrid('loadData',cj);    // reload the user data
+//                slide('查询成功');
+//            } else {
+//                $.messager.show({    // show error message
+//                    title: '错误',
+//                    timeout:3000,
+//                    msg: '查无任务'
+//                });
+//            }
+//        },'json');
+
+//        $('#fm').form('submit',{
+//            url: url+'?id='+$("#ver_id").combobox('getText') + '&address_up=' + $("#address_up").val()+ '&download_where=' + $("#download_where").val()+ '&desc=' + $("#desc").val(),
+//            onSubmit: function(){
+//                return $(this).form('validate');
+//            },
+//            success: function(result){
+//                var result = eval('('+result+')');
+//                if (result.errorMsg){
+//                    $.messager.show({
+//                        title: '错误',
+//                        timeout:3000,
+//                        msg: result.errorMsg
+//                    });
+//                } else {
+//                    $('#dlg').dialog('close');        // close the dialog
+//                    $('#dg').datagrid('reload');    // reload the user data
+//                    slide('添加成功');
+//                }
+//            }
+//        });
+    }
+    function destroyTask(){
+        var row = $('#dg').datagrid('getSelected');
+        if (row){
+            $.messager.confirm('确认','确认删除此任务吗?',function(r){
+
+
+                if (r){
+                    $.post('task/destroy_task.do',{id:row.missionId},function(result){
+                        if (result.success){
+                            $('#dg').datagrid('reload');    // reload the user data
+                            slide('删除成功');
+                        } else {
+                            $.messager.show({    // show error message
+                                title: '错误',
+                                timeout:3000,
+                                msg: result.errorMsg
+                            });
+                        }
+                    },'json');
+                }
+
+
+
+
+
+            });
+        }
+    }
+
+    function formatStatus(val,row){
+        if (val==1){
+            return '<span style="color:green;">启用中</span>';
+        }
+        else{
+            return '<span style="color:red;">禁用中</span>';
+        }
+
+    }
+
+    function formatDate(val, row) {
+
+        if (val != null) {
+            var date = new Date(val);
+
+
+            return date.getFullYear() + '/' + (date.getMonth() + 1) + '/'
+                    + date.getDate();
+
+        }
+    }
+
+    function slide(data){
+        jQuery.messager.show({
+            title:'温馨提示:',
+            msg:data,
+            timeout:3000,
+            showType:'slide'
+        });
+    }
+
+
+
+
+
+</script>
+<style type="text/css">
+    #fm{
+        margin:0;
+        padding:10px 30px;
+    }
+    .ftitle{
+        font-size:14px;
+        font-weight:bold;
+        padding:5px 0;
+        margin-bottom:10px;
+        border-bottom:1px solid #ccc;
+    }
+    .fitem{
+        margin-bottom:5px;
+    }
+    .fitem label{
+        display:inline-block;
+        width:80px;
+    }
+    .fitem input{
+        width:160px;
+    }
+</style>
+
+</body>
+</html>

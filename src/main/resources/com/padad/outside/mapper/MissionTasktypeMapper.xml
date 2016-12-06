@@ -87,6 +87,21 @@
     from mission_tasktype
     where id = #{id,jdbcType=VARCHAR}
   </select>
+
+  <select id="queryAllRecords" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from mission_tasktype
+    limit  #{0} , #{1}
+  </select>
+
+  <select id="queryRecordByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from mission_tasktype
+    where mission_title = #{missionTitle,jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from mission_tasktype
     where id = #{id,jdbcType=VARCHAR}
@@ -133,6 +148,10 @@
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
+  </select>
+  <select id="countBySql" parameterType="java.lang.String" resultType="java.lang.Integer" >
+    select count(*) from mission_tasktype
+
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
     update mission_tasktype

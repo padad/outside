@@ -27,4 +27,11 @@ public interface MissionTasktypeMapper {
     int updateByPrimaryKeySelective(MissionTasktype record);
 
     int updateByPrimaryKey(MissionTasktype record);
+
+
+    List queryAllRecords(int page,int row);
+
+    List queryRecordByName(String name);
+
+    int countBySql();
 }
