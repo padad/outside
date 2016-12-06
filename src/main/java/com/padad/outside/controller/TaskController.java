@@ -122,12 +122,12 @@ public class TaskController extends BaseController{
     Map addTask(MissionTask missionTask,HttpServletRequest rsq)throws Exception {
 
         Map<String, Object> result = new HashMap<String, Object>();
-        String endTime = rsq.getParameter("missionEndTime")==null?"":rsq.getParameter("missionEndTime").split(" ")[0];
+        String text = rsq.getParameter("text")==null?"":rsq.getParameter("text");
         //MissionTask missionTask = new MissionTask();
-
+        String str = new String(new String(text.getBytes("iso-8859-1"),"UTF-8"));
         missionTask.setMissionId("task"+Util.initRandomId());
 
-        missionTask.setKindTitle(initKindTitle(missionTask.getType()));
+        missionTask.setKindTitle(str);
 
         int flag = taskService.insertTask(missionTask);
 
@@ -230,24 +230,24 @@ public class TaskController extends BaseController{
 
 
 
-    private String initKindTitle(int type){
-
-        if (1 == type){
-            return "高级任务";
-        }
-        else if (2 ==type){
-            return "参与活动";
-        }
-        else if (3 == type){
-            return "试用App";
-        }
-        else if (4 == type){
-            return "发朋友圈";
-        }
-        else {
-            return "看视频";
-        }
-
-    }
+//    private String initKindTitle(int type){
+//
+//        if (1 == type){
+//            return "高级任务";
+//        }
+//        else if (2 ==type){
+//            return "参与活动";
+//        }
+//        else if (3 == type){
+//            return "试用App";
+//        }
+//        else if (4 == type){
+//            return "发朋友圈";
+//        }
+//        else {
+//            return "看视频";
+//        }
+//
+//    }
 
 }

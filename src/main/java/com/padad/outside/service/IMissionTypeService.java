@@ -24,4 +24,6 @@ public interface IMissionTypeService {
     //编辑类型,逻辑删除
     int updateByPrimaryKey(MissionTasktype missionTasktype) throws Exception;
 
+    int countBySql();
+
 }

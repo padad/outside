@@ -6,6 +6,7 @@ import com.padad.outside.model.UserRecord;
 import com.padad.outside.pojo.MissionTask;
 import com.padad.outside.pojo.MissionTasktype;
 import com.padad.outside.service.IMissionTypeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,7 +23,7 @@ import java.util.Map;
 @RequestMapping("/missiontype")
 public class MissionTypeController extends BaseController {
 
-
+    @Autowired
     private IMissionTypeService iMissionTypeService;
 
     /**
@@ -100,9 +101,10 @@ public class MissionTypeController extends BaseController {
         Map<String, Object> result = new HashMap<String, Object>();
 
 
-        missionTasktype.setId("task"+ Util.initRandomId());
+        missionTasktype.setId("mtype"+ Util.initRandomId());
 
-
+        int count = iMissionTypeService.countBySql();
+        missionTasktype.setType(count+1);
         int flag = iMissionTypeService.insertRecord(missionTasktype);
 
         if (flag>0)
@@ -198,6 +200,26 @@ public class MissionTypeController extends BaseController {
         }
         return result;
 
+    }
+
+
+    /**
+     * 获取leixing列表
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value="/comboxList.do")
+    public @ResponseBody
+    List<MissionTasktype> taskListByActive(HttpServletRequest request)throws Exception
+    {
+        UserRecord<MissionTasktype> ur = iMissionTypeService.queryAllRecords(1,20);
+
+
+        List<MissionTasktype> list = ur.getUserInfo();
+
+
+        return list;
     }
 
 

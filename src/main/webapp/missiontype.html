@@ -47,9 +47,9 @@
             <label>编号:</label>
             <input name="id" id="id" class="easyui-textbox" required="true">
         </div>
-        <div class="fitem">
+        <div class="fitem" style="display: none">
             <label>任务类型:</label>
-            <input name="type" id="type" class="easyui-textbox" required="true">
+            <input name="type" id="type" class="easyui-textbox">
         </div>
         <div class="fitem">
             <label>类型名称:</label>
@@ -107,7 +107,7 @@
         },'json');
     }
 
-    function saveMyTask(){
+    function save(){
         $('#fm').form('submit',{
             url: url,
             onSubmit: function(){

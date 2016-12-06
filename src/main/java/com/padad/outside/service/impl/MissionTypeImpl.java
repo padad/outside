@@ -47,6 +47,10 @@ public class MissionTypeImpl implements IMissionTypeService {
         return missionTasktypeMapper.updateByPrimaryKey(missionTasktype);
     }
 
+    public int countBySql() {
+        return missionTasktypeMapper.countBySql();
+    }
+
     public int initTableRows()
     {
 
