@@ -15,8 +15,8 @@
     <script type="text/javascript">
 
         function initCombox() {
-            $('#type').combobox({
-                url: 'missiontype/comboxList.do',
+            $('#type_id').combobox({
+                url: 'missiontype/missionAuthCombox.do',
                 valueField: 'type',
                 textField: 'missionTitle'
             });
@@ -27,7 +27,7 @@
 
 
 </head>
-<body>
+<body onload="initCombox()">
 <table id="dg" title="任务信息" class="easyui-datagrid" loadMsg="数据装载中......" style="width:100%;height:400px"
        url="task/taskLists.do"
        toolbar="#toolbar" pagination="true"
@@ -44,6 +44,7 @@
         <th field="taskApi" width="30">第三发接口</th>
         <th field="movieUrl" width="30">影片,app地址</th>
         <th field="kindTitle" width="30">类型</th>
+
         <th field="active" width="10" formatter="formatStatus">激活</th>
     </tr>
     </thead>
@@ -80,7 +81,7 @@
                     </div>
                     <div class="fitem">
                         <label>难度:</label>
-                        <input name="missionStar" class="easyui-textbox" required="true">
+                        <input name="missionStar" class="easyui-numberbox" maxlength="1" required="true">
                     </div>
                     <div class="fitem">
                         <label>开始时间:</label>
@@ -92,7 +93,7 @@
                     </div>
                     <div class="fitem">
                         <label>金额:</label>
-                        <input name="moneyPrice" class="easyui-textbox">
+                        <input name="moneyPrice" class="easyui-numberbox" maxlength="4">
                     </div>
                 </td>
                 <td style="width: auto">
@@ -108,10 +109,10 @@
                         <label>影片App地址:</label>
                         <input name="movieUrl" class="easyui-textbox">
                     </div>
+
                     <div class="fitem">
                         <label>类型:</label>
-                        <input name="type" id="type" class="easyui-combobox"  type="text"
-                        >
+                        <input name="types" id="type_id" class="easyui-combobox"  valueField="type"  textField="missionTitle" panelHeight="auto">
                     </div>
 
                     <div class="fitem">
@@ -137,21 +138,23 @@
 
 
 <script type="text/javascript">
-    var url;
+    var url = 'task/save_task.do?yu=oo';
     function newTask(){
         $('#dlg').dialog('open').dialog('center').dialog('setTitle','添加任务');
         $('#fm').form('clear');
         $("#mission_id").datebox('disable');
         initCombox();
         // .$("#registerTime").attr('readonly',true);
-        url = 'task/save_task.do';
+        url = 'task/save_task.do?yu=oo';
     }
     function editTask(){
+        initCombox();
         var row = $('#dg').datagrid('getSelected');
         if (row){
             $('#dlg').dialog('open').dialog('center').dialog('setTitle','编辑');
             $('#fm').form('load',row);
-            url = 'task/update_task.do?id='+row.missionId;
+
+            url = 'task/update_task.do?yu=oo&id='+row.missionId;
         }
     }
 
@@ -191,7 +194,7 @@
 
     function saveTask(){
         $('#fm').form('submit',{
-            url: url+'?text='+$("#type").combobox('getText'),
+            url: url+'&text='+$("#type_id").combobox('getText') + '&value='+$("#type_id").combobox('getValue'),
             onSubmit: function(){
                 return $(this).form('validate');
             },

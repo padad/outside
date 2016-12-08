@@ -5,9 +5,19 @@ public class MissionAuth {
 
     private Integer auth;
 
-    private String time;
+    private String timeSetting;
 
-    private String desc;
+    private String descAuth;
+
+    private Integer activeAuth;
+
+    public Integer getActiveAuth() {
+        return activeAuth;
+    }
+
+    public void setActiveAuth(Integer activeAuth) {
+        this.activeAuth = activeAuth;
+    }
 
     public String getAuthId() {
         return authId;
@@ -25,19 +35,19 @@ public class MissionAuth {
         this.auth = auth;
     }
 
-    public String getTime() {
-        return time;
+    public String getTimeSetting() {
+        return timeSetting;
     }
 
-    public void setTime(String time) {
-        this.time = time == null ? null : time.trim();
+    public void setTimeSetting(String timeSetting) {
+        this.timeSetting = timeSetting == null ? null : timeSetting.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescAuth() {
+        return descAuth;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDescAuth(String descAuth) {
+        this.descAuth = descAuth == null ? null : descAuth.trim();
     }
 }

@@ -351,46 +351,46 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.padad.outside.pojo.MissionUserinfo" >
     update mission_userinfo
     <set >
-      <if test="username != null" >
+      <if test="username != null and username!=''" >
         username = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
+      <if test="password != null and password!='' " >
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="avatar != null" >
+      <if test="avatar != null and avatar!='' " >
         avatar = #{avatar,jdbcType=VARCHAR},
       </if>
-      <if test="nick != null" >
+      <if test="nick != null and nick!='' " >
         nick = #{nick,jdbcType=VARCHAR},
       </if>
-      <if test="phone != null" >
+      <if test="phone != null and phone!='' " >
         phone = #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="registerTime != null" >
+      <if test="registerTime != null and registerTime!='' " >
         register_time = #{registerTime,jdbcType=VARCHAR},
       </if>
-      <if test="lastTime != null" >
+      <if test="lastTime != null and lastTime!='' " >
         last_time = #{lastTime,jdbcType=VARCHAR},
       </if>
-      <if test="level != null" >
+      <if test="level != null and level!=0 " >
         level = #{level,jdbcType=INTEGER},
       </if>
-      <if test="auth != null" >
+      <if test="auth != null and auth!=0 " >
         auth = #{auth,jdbcType=INTEGER},
       </if>
-      <if test="price != null" >
+      <if test="price != null and price!='' " >
         price = #{price,jdbcType=VARCHAR},
       </if>
-      <if test="experience != null" >
+      <if test="experience != null and experience!='' " >
         experience = #{experience,jdbcType=VARCHAR},
       </if>
-      <if test="deviceid != null" >
+      <if test="deviceid != null and deviceid!='' " >
         deviceid = #{deviceid,jdbcType=VARCHAR},
       </if>
-      <if test="machine != null" >
+      <if test="machine != null and machine!='' " >
         machine = #{machine,jdbcType=VARCHAR},
       </if>
-      <if test="continueTime != null" >
+      <if test="continueTime != null and continueTime!=0" >
         continue_time = #{continueTime,jdbcType=INTEGER},
       </if>
       <if test="status != null" >
@@ -401,21 +401,53 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.padad.outside.pojo.MissionUserinfo" >
     update mission_userinfo
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      avatar = #{avatar,jdbcType=VARCHAR},
-      nick = #{nick,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      register_time = #{registerTime,jdbcType=VARCHAR},
-      last_time = #{lastTime,jdbcType=VARCHAR},
-      level = #{level,jdbcType=INTEGER},
-      auth = #{auth,jdbcType=INTEGER},
-      price = #{price,jdbcType=VARCHAR},
-      experience = #{experience,jdbcType=VARCHAR},
-      deviceid = #{deviceid,jdbcType=VARCHAR},
-      machine = #{machine,jdbcType=VARCHAR},
-      continue_time = #{continueTime,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER}
+    <set >
+      <if test="username != null and username!=''" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null and password!='' " >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null and avatar!='' " >
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="nick != null and nick!='' " >
+        nick = #{nick,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null and phone!='' " >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null and registerTime!='' " >
+        register_time = #{registerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null and lastTime!='' " >
+        last_time = #{lastTime,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null and level!=0 " >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="auth != null and auth!=0 " >
+        auth = #{auth,jdbcType=INTEGER},
+      </if>
+      <if test="price != null and price!='' " >
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null and experience!='' " >
+        experience = #{experience,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceid != null and deviceid!='' " >
+        deviceid = #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="machine != null and machine!='' " >
+        machine = #{machine,jdbcType=VARCHAR},
+      </if>
+      <if test="continueTime != null and continueTime!=0" >
+        continue_time = #{continueTime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
 </mapper>

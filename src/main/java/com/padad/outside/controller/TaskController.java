@@ -123,11 +123,13 @@ public class TaskController extends BaseController{
 
         Map<String, Object> result = new HashMap<String, Object>();
         String text = rsq.getParameter("text")==null?"":rsq.getParameter("text");
+        String value = rsq.getParameter("value")==null?"":rsq.getParameter("value");
         //MissionTask missionTask = new MissionTask();
         String str = new String(new String(text.getBytes("iso-8859-1"),"UTF-8"));
         missionTask.setMissionId("task"+Util.initRandomId());
 
         missionTask.setKindTitle(str);
+        missionTask.setType(Integer.valueOf(value));
 
         int flag = taskService.insertTask(missionTask);
 
@@ -194,12 +196,16 @@ public class TaskController extends BaseController{
      */
     @RequestMapping(value="/update_task.do")
     public @ResponseBody
-    Map editTask(HttpServletRequest rsq,MissionTask missionTask)throws Exception {
+    Map editTask(HttpServletRequest rsq,MissionTask missionTask,String text)throws Exception {
 
 //        MissionTask missionTask = new MissionTask();
 //        missionTask.setMissionId(id);
 //        missionTask.setActive(0);
-
+        rsq.getQueryString();
+        String ggg = rsq.getRequestURL().toString();
+        String texts = rsq.getParameter("text");
+        String id = rsq.getParameter("id");
+        String str = new String(new String(text.getBytes("iso-8859-1"),"UTF-8"));
         Map<String,Object> result = new HashMap<String, Object>();
 
         if (!initAuth(rsq,3)){
@@ -208,7 +214,8 @@ public class TaskController extends BaseController{
             return result;
         }
 
-
+        missionTask.setMissionId(id);
+        missionTask.setKindTitle(str);
         int flag = taskService.updateByPrimaryKey(missionTask);
 
         if (flag>0)

@@ -4,8 +4,9 @@
   <resultMap id="BaseResultMap" type="com.padad.outside.pojo.MissionAuth" >
     <id column="auth_id" property="authId" jdbcType="VARCHAR" />
     <result column="auth" property="auth" jdbcType="INTEGER" />
-    <result column="time" property="time" jdbcType="VARCHAR" />
-    <result column="desc" property="desc" jdbcType="VARCHAR" />
+    <result column="time_setting" property="timeSetting" jdbcType="VARCHAR" />
+    <result column="desc_auth" property="descAuth" jdbcType="VARCHAR" />
+    <result column="active_auth" property="activeAuth" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,8 +67,47 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    auth_id, auth, time, desc
+    auth_id, auth, time_setting, desc_auth,active_auth
   </sql>
+
+  <select id="queryRecordByModel" resultMap="BaseResultMap" parameterType="com.padad.outside.model.AuthSearchModel" >
+    select
+      <include refid="Base_Column_List"/>
+    from mission_auth
+
+    <where>
+        1=1
+      <if test="authId != null and authId!='' " >
+        and auth_id = #{authId,jdbcType=VARCHAR}
+      </if>
+      <if test="auth != null and auth!=0" >
+        and auth = #{auth,jdbcType=INTEGER}
+      </if>
+      <if test="timeSetting != null and timeSetting!='' " >
+        and time_setting = #{timeSetting,jdbcType=VARCHAR}
+      </if>
+      <if test="descAuth != null and descAuth!='' " >
+        and desc_auth = #{descAuth,jdbcType=VARCHAR}
+      </if>
+      <if test="activeAuth != null and activeAuth!=0 " >
+        and active_auth = #{activeAuth,jdbcType=INTEGER}
+      </if>
+    </where>
+
+    limit  #{page,jdbcType=INTEGER} , #{row,jdbcType=INTEGER}
+  </select>
+
+  <select id="countBySql" parameterType="java.lang.String" resultType="java.lang.Integer" >
+    select count(*) from mission_auth
+
+  </select>
+
+  <select id="countBySqlByStatus" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+    select count(*) from mission_auth
+    where active_auth = #{0}
+  </select>
+
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.padad.outside.pojo.MissionAuthExample" >
     select
     <if test="distinct" >

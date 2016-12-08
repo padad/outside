@@ -255,7 +255,7 @@ public class UserInfoController extends BaseController{
     }
 
     @RequestMapping(value="/update_user.do")
-    public @ResponseBody Map updateUser(HttpServletRequest rsq)
+    public @ResponseBody Map updateUser(HttpServletRequest rsq,MissionUserinfo missionUserinfo)
     {
         Map<String, Object> result = new HashMap<String, Object>();
         if (!initAuth(rsq,3)){
@@ -288,13 +288,13 @@ public class UserInfoController extends BaseController{
             userInfo.setUserId(id);
             userInfo.setAuth(role);
             userInfo.setAvatar("");
-            userInfo.setContinueTime(Integer.valueOf(continue_time));
+            //userInfo.setContinueTime(Integer.valueOf(continue_time));
 
             userInfo.setStatus(Integer.valueOf(status));
-            userInfo.setExperience(experience);
-            userInfo.setRegisterTime(registerTime);
-            userInfo.setLastTime(lastTime);
-            userInfo.setLevel(Integer.valueOf(level));
+            //userInfo.setExperience(experience);
+            //userInfo.setRegisterTime(registerTime);
+            //userInfo.setLastTime(lastTime);
+            //userInfo.setLevel(Integer.valueOf(level));
             //userInfo.setMachine("pc");
             userInfo.setPhone(userName);
             userInfo.setNick(userNick);

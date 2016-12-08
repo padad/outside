@@ -1,5 +1,6 @@
 package com.padad.outside.mapper;
 
+import com.padad.outside.model.AuthSearchModel;
 import com.padad.outside.pojo.MissionAuth;
 import com.padad.outside.pojo.MissionAuthExample;
 import java.util.List;
@@ -27,4 +28,8 @@ public interface MissionAuthMapper {
     int updateByPrimaryKeySelective(MissionAuth record);
 
     int updateByPrimaryKey(MissionAuth record);
+
+
+    List<MissionAuth> queryRecordByModel(AuthSearchModel authSearchModel);
+    int countBySqlByStatus(int status);
 }

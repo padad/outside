@@ -67,7 +67,7 @@ public class AppController extends HttpServlet {
 
 
             } catch (Exception e) {
-                result.put("success", false);
+                result.put("failure", true);
                 result.put("errorMsg", e.getMessage());
 
             }
