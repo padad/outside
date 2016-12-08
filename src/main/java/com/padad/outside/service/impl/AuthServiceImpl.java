@@ -11,7 +11,9 @@ import com.padad.outside.service.IAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Admin on 16/12/7.
@@ -52,6 +54,52 @@ public class AuthServiceImpl implements IAuthService {
 
 
         return cj;
+    }
+
+    public Map insert(MissionAuth missionAuth) {
+
+        Map<String, Object> result = new HashMap<String, Object>();
+        int flag = missionAuthMapper.insert(missionAuth);
+
+        if (flag>0)
+        {
+            result.put("success", true);
+        }
+        else
+        {
+
+            result.put("errorMsg", "添加失败。");
+
+            result.put("failure", true);
+
+        }
+
+        return result;
+    }
+
+    public Map updateByModel(MissionAuth missionAuth) throws Exception {
+
+
+        int count = missionAuthMapper.updateByPrimaryKeySelective(missionAuth);
+
+        Map<String,Object> result = new HashMap<String, Object>();
+
+
+
+        if (count>0)
+        {
+            result.put("success", true);
+        }
+        else
+        {
+
+
+
+            result.put("failure", true);
+
+        }
+
+        return result;
     }
 
 

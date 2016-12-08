@@ -33,7 +33,7 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newOne()">新权限</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editOne()">编辑权限</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyOne()">删除权限</a><br/>
-    <div style="margin-bottom:10px;margin-top:10px">
+    <div style="margin-bottom:10px;margin-top:10px;display: none">
         <input id="input_search_id" class="easyui-textbox" data-options="iconWidth:28,prompt:'权限等级'" style="width:70px;height:26px;">
 
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="doSearch()">查询</a>
@@ -49,13 +49,13 @@
             <label>编号:</label>
             <input name="authId" id="id" class="easyui-textbox">
         </div>
-        <div class="fitem" style="display: none">
+        <div class="fitem" >
             <label>权限等级:</label>
             <input name="auth" id="type" class="easyui-textbox">
         </div>
         <div class="fitem">
-            <label>权限时间:</label>
-            <input name="timeSetting" class="easyui-timebox" required="true">
+            <label>设置时间:</label>
+            <input name="timeSetting" class="easyui-datetimebox" required="true">
         </div>
 
         <div class="fitem">
