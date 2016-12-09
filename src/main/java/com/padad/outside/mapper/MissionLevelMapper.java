@@ -1,8 +1,13 @@
 package com.padad.outside.mapper;
 
+import com.padad.outside.model.LevelSearchModel;
+import com.padad.outside.model.StarSearchModel;
+import com.padad.outside.pojo.MissionAuth;
 import com.padad.outside.pojo.MissionLevel;
 import com.padad.outside.pojo.MissionLevelExample;
 import java.util.List;
+
+import com.padad.outside.pojo.MissionStar;
 import org.apache.ibatis.annotations.Param;
 
 public interface MissionLevelMapper {
@@ -27,4 +32,7 @@ public interface MissionLevelMapper {
     int updateByPrimaryKeySelective(MissionLevel record);
 
     int updateByPrimaryKey(MissionLevel record);
+
+    List<MissionAuth> queryRecordByModel(LevelSearchModel starSearchModel);
+    int countBySqlByStatus(int status);
 }

@@ -1,6 +1,10 @@
-package com.padad.outside.pojo;
+package com.padad.outside.model;
 
-public class MissionStar {
+/**
+ * Created by Admin on 16/12/9.
+ */
+public class StarSearchModel {
+
     private String id;
 
     private Integer missionStar;
@@ -9,12 +13,17 @@ public class MissionStar {
 
     private Integer activeStar;
 
+    private int row;
+
+    private int page;
+
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+        this.id = id;
     }
 
     public Integer getMissionStar() {
@@ -30,7 +39,7 @@ public class MissionStar {
     }
 
     public void setDescStar(String descStar) {
-        this.descStar = descStar == null ? null : descStar.trim();
+        this.descStar = descStar;
     }
 
     public Integer getActiveStar() {
@@ -39,5 +48,21 @@ public class MissionStar {
 
     public void setActiveStar(Integer activeStar) {
         this.activeStar = activeStar;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
     }
 }

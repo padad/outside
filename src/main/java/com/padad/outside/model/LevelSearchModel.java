@@ -1,6 +1,10 @@
-package com.padad.outside.pojo;
+package com.padad.outside.model;
 
-public class MissionLevel {
+/**
+ * Created by Admin on 16/12/9.
+ */
+public class LevelSearchModel {
+
     private String id;
 
     private Integer level;
@@ -9,12 +13,17 @@ public class MissionLevel {
 
     private Integer activeLevel;
 
+    private int row;
+
+    private int page;
+
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+        this.id = id;
     }
 
     public Integer getLevel() {
@@ -30,7 +39,7 @@ public class MissionLevel {
     }
 
     public void setExperience(String experience) {
-        this.experience = experience == null ? null : experience.trim();
+        this.experience = experience;
     }
 
     public Integer getActiveLevel() {
@@ -39,5 +48,21 @@ public class MissionLevel {
 
     public void setActiveLevel(Integer activeLevel) {
         this.activeLevel = activeLevel;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
     }
 }
