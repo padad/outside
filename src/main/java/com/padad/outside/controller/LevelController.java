@@ -2,9 +2,12 @@ package com.padad.outside.controller;
 
 import com.padad.outside.framework.Util;
 import com.padad.outside.model.CommonList;
+import com.padad.outside.model.LevelSearchModel;
 import com.padad.outside.model.StarSearchModel;
 import com.padad.outside.pojo.MissionAuth;
+import com.padad.outside.pojo.MissionLevel;
 import com.padad.outside.pojo.MissionStar;
+import com.padad.outside.service.ILevelService;
 import com.padad.outside.service.IStarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,24 +26,24 @@ import java.util.Map;
 public class LevelController extends BaseController {
 
     @Autowired
-    private IStarService iStarService;
+    private ILevelService levelService;
 
     @RequestMapping(value="/missionAllLevel.do")
     public @ResponseBody
     CommonList searchRecords(HttpServletRequest request)throws Exception
     {
 
-        StarSearchModel starSearchModel = new StarSearchModel();
+        LevelSearchModel levelSearchModel = new LevelSearchModel();
 
 
         int page = request.getParameter("page")==null?1:Integer.valueOf(request.getParameter("page"));
         int row = request.getParameter("rows")==null?10:Integer.valueOf(request.getParameter("rows"));
 
-        starSearchModel.setPage(page);
-        starSearchModel.setRow(row);
-        starSearchModel.setActiveStar(1);
+        levelSearchModel.setPage(page);
+        levelSearchModel.setRow(row);
+        levelSearchModel.setActiveLevel(1);
 
-        CommonList cj = iStarService.queryRecordByModel(starSearchModel);
+        CommonList cj = levelService.queryRecordByModel(levelSearchModel);
 
 
 
@@ -52,18 +55,18 @@ public class LevelController extends BaseController {
     List<MissionAuth> searchRecordsList(HttpServletRequest request)throws Exception
     {
 
-        StarSearchModel starSearchModel = new StarSearchModel();
+        LevelSearchModel levelSearchModel = new LevelSearchModel();
 
 
         int page = request.getParameter("page")==null?1:Integer.valueOf(request.getParameter("page"));
         int row = request.getParameter("rows")==null?10:Integer.valueOf(request.getParameter("rows"));
 
-        starSearchModel.setPage(page);
-        starSearchModel.setRow(row);
-        starSearchModel.setActiveStar(1);
+        levelSearchModel.setPage(page);
+        levelSearchModel.setRow(row);
+        levelSearchModel.setActiveLevel(1);
 
 
-        CommonList cj = iStarService.queryRecordByModel(starSearchModel);
+        CommonList cj = levelService.queryRecordByModel(levelSearchModel);
 
 
 
@@ -77,18 +80,18 @@ public class LevelController extends BaseController {
      */
     @RequestMapping(value="/save.do")
     public @ResponseBody
-    Map addTask(MissionStar missionStar, HttpServletRequest rsq)throws Exception {
+    Map addTask(MissionLevel missionLevel, HttpServletRequest rsq)throws Exception {
 
 
 
 
 
 
-        missionStar.setId("star"+ Util.initRandomId());
+        missionLevel.setId("level"+ Util.initRandomId());
 
 
 
-        Map result = iStarService.insert(missionStar);
+        Map result = levelService.insert(missionLevel);
 
 
         return result;
@@ -108,10 +111,10 @@ public class LevelController extends BaseController {
 
         String ids = rsq.getParameter("id").toString();
 
-        MissionStar missionStar = new MissionStar();
+        MissionLevel missionStar = new MissionLevel();
         missionStar.setId(id);
-        missionStar.setActiveStar(0);
-        Map result = iStarService.updateByModel(missionStar);
+        missionStar.setActiveLevel(0);
+        Map result = levelService.updateByModel(missionStar);
 
 
         return result;
@@ -125,14 +128,14 @@ public class LevelController extends BaseController {
      */
     @RequestMapping(value="/update_one.do")
     public @ResponseBody
-    Map update(HttpServletRequest rsq, MissionStar missionStar,String id) throws Exception{
+    Map update(HttpServletRequest rsq, MissionLevel missionLevel,String id) throws Exception{
 
 
 
         String ids = rsq.getParameter("id").toString();
 
-        missionStar.setId(id);
-        Map result = iStarService.updateByModel(missionStar);
+        missionLevel.setId(id);
+        Map result = levelService.updateByModel(missionLevel);
 
 
         return result;

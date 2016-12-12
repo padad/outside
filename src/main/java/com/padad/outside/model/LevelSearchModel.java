@@ -7,7 +7,7 @@ public class LevelSearchModel {
 
     private String id;
 
-    private Integer level;
+    private Integer levelNum;
 
     private String experience;
 
@@ -26,12 +26,12 @@ public class LevelSearchModel {
         this.id = id;
     }
 
-    public Integer getLevel() {
-        return level;
+    public Integer getLevelNum() {
+        return levelNum;
     }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setLevelNum(Integer level) {
+        this.levelNum = levelNum;
     }
 
     public String getExperience() {

@@ -3,7 +3,7 @@ package com.padad.outside.pojo;
 public class MissionLevel {
     private String id;
 
-    private Integer level;
+    private Integer levelNum;
 
     private String experience;
 
@@ -17,12 +17,12 @@ public class MissionLevel {
         this.id = id == null ? null : id.trim();
     }
 
-    public Integer getLevel() {
-        return level;
+    public Integer getLevelNum() {
+        return levelNum;
     }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setLevelNum(Integer levelNum) {
+        this.levelNum = levelNum;
     }
 
     public String getExperience() {

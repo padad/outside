@@ -33,6 +33,6 @@ public interface MissionLevelMapper {
 
     int updateByPrimaryKey(MissionLevel record);
 
-    List<MissionAuth> queryRecordByModel(LevelSearchModel starSearchModel);
+    List<MissionLevel> queryRecordByModel(LevelSearchModel starSearchModel);
     int countBySqlByStatus(int status);
 }

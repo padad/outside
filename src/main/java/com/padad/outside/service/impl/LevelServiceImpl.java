@@ -27,10 +27,10 @@ public class LevelServiceImpl implements ILevelService {
         int page = levelSearchModel.getPage();
         int rows = levelSearchModel.getRow();
         levelSearchModel.setPage((page-1)*rows);
-        levelSearchModel.setRow(page*rows-1);
+        levelSearchModel.setRow(page*rows);
 
         int total = initTableRowsByStatus(levelSearchModel.getActiveLevel());
-        List<MissionAuth> list = missionLevelMapper.queryRecordByModel(levelSearchModel);
+        List<MissionLevel> list = missionLevelMapper.queryRecordByModel(levelSearchModel);
 
 
         CommonList cj = new CommonList();
