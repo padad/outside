@@ -53,9 +53,9 @@ public class AppController extends HttpServlet {
         if (!uploadfile2.isEmpty()) {
             try {
                 int lastIndexOfDot = uploadfile2.getOriginalFilename().lastIndexOf(".");
-
+                String fileSuffix = uploadfile2.getOriginalFilename().substring(lastIndexOfDot);
                 byte[] fileContent = uploadfile2.getBytes();
-                String key = qiniuFileUploadService.uploadFile(fileContent);
+                String key = qiniuFileUploadService.uploadFile(fileContent,"apk/","",fileSuffix);
 
 
                 String fullPath = qiniuBaseUri + key;

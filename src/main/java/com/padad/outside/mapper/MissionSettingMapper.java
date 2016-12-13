@@ -1,5 +1,8 @@
 package com.padad.outside.mapper;
 
+import com.padad.outside.model.LevelSearchModel;
+import com.padad.outside.model.SettingSearchModel;
+import com.padad.outside.pojo.MissionLevel;
 import com.padad.outside.pojo.MissionSetting;
 import com.padad.outside.pojo.MissionSettingExample;
 import java.util.List;
@@ -27,4 +30,8 @@ public interface MissionSettingMapper {
     int updateByPrimaryKeySelective(MissionSetting record);
 
     int updateByPrimaryKey(MissionSetting record);
+
+
+    List<MissionSetting> queryRecordByModel(SettingSearchModel settingSearchModel);
+    int countBySqlByStatus(int status);
 }

@@ -9,6 +9,7 @@ import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -42,6 +43,10 @@ public class QiniuFileUploadService implements IQiniuFileUploadService {
 
     private String directory = "image/";
 
+    private String fileSuffix = "";
+
+    private String fileName = "";
+
 
     @PostConstruct
     public void init(){ //不使用断点续传
@@ -56,6 +61,12 @@ public class QiniuFileUploadService implements IQiniuFileUploadService {
         //uploadToken = auth.uploadToken(bucketName);
     }
 
+    public String uploadFile(byte[] data,String dirs,String fileName,String fileSuffix) throws IOException{
+        this.fileName = fileName;
+        this.fileSuffix = fileSuffix;
+        directory = dirs;
+        return uploadFile(data);
+    }
 
     /**
      * 文件上传成功之后返回可访问的url
@@ -65,7 +76,7 @@ public class QiniuFileUploadService implements IQiniuFileUploadService {
      */
     public String uploadFile(byte[] data) throws IOException{
         try{
-            String key = getKey();
+            String key = getKey()+fileSuffix;
             Response response = uploadManager.put(data,key,auth.uploadToken(bucketName,key));
 
             return key;
@@ -110,7 +121,14 @@ public class QiniuFileUploadService implements IQiniuFileUploadService {
 
 
     private String getKey(){
-        return directory+UUID.randomUUID().toString().replaceAll("-","");
+        if (StringUtils.isEmpty(fileName)) {
+
+
+            return directory + UUID.randomUUID().toString().replaceAll("-", "");
+        }
+        else {
+            return directory + fileName;
+        }
     }
 
 }

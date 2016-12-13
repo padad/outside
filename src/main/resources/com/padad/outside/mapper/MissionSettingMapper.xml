@@ -89,6 +89,48 @@
     from mission_setting
     where id = #{id,jdbcType=VARCHAR}
   </select>
+
+
+  <select id="queryRecordByModel" resultMap="BaseResultMap" parameterType="com.padad.outside.model.SettingSearchModel" >
+    select
+    <include refid="Base_Column_List"/>
+    from mission_setting
+
+    <where>
+      1=1
+      <if test="id != null and id!='' " >
+        and id = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="appVersion != null" >
+        and app_version = #{appVersion,jdbcType=INTEGER}
+      </if>
+      <if test="appDesc != null and appDesc!='' " >
+        and app_desc = #{appDesc,jdbcType=VARCHAR}
+      </if>
+      <if test="appAddress != null and appAddress!='' " >
+        and app_address = #{appAddress,jdbcType=VARCHAR}
+      </if>
+
+      <if test="force != null" >
+        and force = #{force,jdbcType=INTEGER}
+      </if>
+    </where>
+
+    order by app_version DESC
+
+    limit  #{page,jdbcType=INTEGER} , #{row,jdbcType=INTEGER}
+
+  </select>
+
+  <select id="countBySql" parameterType="java.lang.String" resultType="java.lang.Integer" >
+    select count(*) from mission_setting
+
+  </select>
+
+  <select id="countBySqlByStatus" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+    select count(*) from mission_setting
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from mission_setting
     where id = #{id,jdbcType=VARCHAR}
@@ -188,10 +230,10 @@
       <if test="appVersion != null" >
         app_version = #{appVersion,jdbcType=INTEGER},
       </if>
-      <if test="appDesc != null" >
+      <if test="appDesc != null and appDesc!='' " >
         app_desc = #{appDesc,jdbcType=VARCHAR},
       </if>
-      <if test="appAddress != null" >
+      <if test="appAddress != null and appAddress!='' " >
         app_address = #{appAddress,jdbcType=VARCHAR},
       </if>
       <if test="force != null" >

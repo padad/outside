@@ -13,5 +13,7 @@ public interface IQiniuFileUploadService {
 
     String uploadFile(byte[] data) throws IOException;
 
+    String uploadFile(byte[] data,String dirs,String fileName,String fileSuffix) throws IOException;
+
     String uploadFile(File file) throws IOException;
 }
