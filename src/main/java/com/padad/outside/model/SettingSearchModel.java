@@ -13,7 +13,7 @@ public class SettingSearchModel {
 
     private String appAddress;
 
-    private Integer force;
+    private Integer forceSetting;
 
     private int row;
 
@@ -51,12 +51,12 @@ public class SettingSearchModel {
         this.appAddress = appAddress;
     }
 
-    public Integer getForce() {
-        return force;
+    public Integer getForceSetting() {
+        return forceSetting;
     }
 
-    public void setForce(Integer force) {
-        this.force = force;
+    public void setForceSetting(Integer forceSetting) {
+        this.forceSetting = forceSetting;
     }
 
     public int getRow() {

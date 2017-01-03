@@ -8,9 +8,11 @@
     <link rel="stylesheet" type="text/css" href="res/css/themes/icon.css">
     <link rel="stylesheet" type="text/css" href="res/css/themes/color.css">
     <link rel="stylesheet" type="text/css" href="res/css/demo/demo.css">
+    <link rel="stylesheet" type="text/css" href="res/css/loading.css">
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
     <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+
 
 </head>
 <body>
@@ -24,14 +26,14 @@
         <th field="appVersion" width="30">app版本</th>
         <th field="appDesc" width="30">app描述</th>
         <th field="appAddress" width="30">地址</th>
-        <th field="force" width="30" formatter="formatStatus">强制升级</th>
+        <th field="forceSetting" width="30" formatter="formatStatus">强制升级</th>
     </tr>
     </thead>
 </table>
 
 <div id="toolbar">
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newOne()">新版本</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editOne()">编辑版本</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" style="display: none" onclick="editOne()">编辑版本</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyOne()">删除版本</a><br/>
     <div style="margin-bottom:10px;margin-top:10px;display: none">
         <input id="input_search_id" class="easyui-textbox" data-options="iconWidth:28,prompt:'权限等级'" style="width:70px;height:26px;">
@@ -73,8 +75,16 @@
                    panelHeight="auto">
         </div>
 
-        <div class="fitem">
-            <label id="loading_up" style="display:none;">上传中...</label>
+        <div class="fitem" id="loading_up" style="display: none;text-align: center;height: 30px">
+
+            <div class="spinner" style="height: 30px">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>&nbsp;
+            <a>上传中,请稍后...</a>
             
         </div>
 
@@ -134,12 +144,15 @@
 
     function save(){
         $("#loading_up").show();
+
         $('#fm').form('submit',{
             url: url+"&force="+$('#force').combobox('getValue'),
             onSubmit: function(){
                 return $(this).form('validate');
             },
             success: function(result){
+
+                $("#loading_up").hide();
                 var result = eval('('+result+')');
                 if (result.errorMsg){
                     $.messager.show({
@@ -153,6 +166,7 @@
                     $('#dg').datagrid('reload');    // reload the user data
                     slide('添加成功');
                 }
+
             }
         });
     }
@@ -163,7 +177,7 @@
 
 
                 if (r){
-                    $.post('setting/destroy_one.do',{id:row.id},function(result){
+                    $.post('setting/destroy_one.do',{id:row.id,address:row.appAddress},function(result){
                         if (result.success){
                             $('#dg').datagrid('reload');    // reload the user data
                             slide('删除成功');
@@ -197,7 +211,7 @@
     }
 
     function formatStatus(val,row){
-        if (val==1){
+        if (val==0){
             return '<span style="color:green;">一般升级</span>';
         }
         else{

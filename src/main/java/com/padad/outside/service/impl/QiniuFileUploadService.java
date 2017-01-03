@@ -4,6 +4,7 @@ import com.padad.outside.service.IQiniuFileUploadService;
 import com.qiniu.common.QiniuException;
 import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
+import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
@@ -40,6 +41,7 @@ public class QiniuFileUploadService implements IQiniuFileUploadService {
 
     private UploadManager uploadManager;
     //private FileRecorder fileRecorder;
+    private BucketManager bucketManager;
 
     private String directory = "image/";
 
@@ -56,6 +58,8 @@ public class QiniuFileUploadService implements IQiniuFileUploadService {
 
         auth = Auth.create(accessKey,secretKey);
         uploadManager = new UploadManager(c);
+
+        bucketManager = new BucketManager(auth,c);
 
         //uploadManager = new UploadManager(fileRecorder);
         //uploadToken = auth.uploadToken(bucketName);
@@ -117,7 +121,20 @@ public class QiniuFileUploadService implements IQiniuFileUploadService {
         return null;
     }
 
+    public int delete(String key) {
+        try {
 
+
+
+            bucketManager.delete(bucketName, key);
+            return 1;
+        }
+        catch (QiniuException e){
+            Response r = e.response;
+            e.printStackTrace();
+            return 0;
+        }
+    }
 
 
     private String getKey(){

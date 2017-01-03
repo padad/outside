@@ -22,4 +22,7 @@ public interface IAppSetting  {
     //禁用 逻辑删除
     Map updateByModel(MissionSetting missionSetting) throws Exception;
 
+    //删除
+    Map deleteByPrimaryKey(String key) throws Exception;
+
 }

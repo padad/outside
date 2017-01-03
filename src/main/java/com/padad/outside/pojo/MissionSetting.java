@@ -9,7 +9,7 @@ public class MissionSetting {
 
     private String appAddress;
 
-    private Integer force;
+    private Integer forceSetting;
 
     public String getId() {
         return id;
@@ -43,11 +43,11 @@ public class MissionSetting {
         this.appAddress = appAddress == null ? null : appAddress.trim();
     }
 
-    public Integer getForce() {
-        return force;
+    public Integer getForceSetting() {
+        return forceSetting;
     }
 
-    public void setForce(Integer force) {
-        this.force = force;
+    public void setForceSetting(Integer forceSetting) {
+        this.forceSetting = forceSetting;
     }
 }

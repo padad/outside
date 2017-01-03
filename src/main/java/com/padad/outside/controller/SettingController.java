@@ -92,16 +92,19 @@ public class SettingController extends BaseController{
      */
     @RequestMapping(value="/destroy_one.do")
     public @ResponseBody
-    Map destroy(HttpServletRequest rsq, String id) throws Exception{
+    Map destroy(HttpServletRequest rsq, String id,String address) throws Exception{
 
 
 
-        String ids = rsq.getParameter("id").toString();
+//        String ids = rsq.getParameter("id").toString();
+//
+//        MissionSetting missionSetting = new MissionSetting();
+//        missionSetting.setId(id);
+//        int lastIndexOfShu = address.indexOf("/apk")+1;
+//        String key = address.substring(lastIndexOfShu);
+//        int flag = qiniuFileUploadService.delete(key);
 
-        MissionSetting missionSetting = new MissionSetting();
-        missionSetting.setId(id);
-
-        Map result = iAppSetting.updateByModel(missionSetting);
+        Map result = iAppSetting.deleteByPrimaryKey(id);
 
 
         return result;
@@ -115,7 +118,7 @@ public class SettingController extends BaseController{
      */
     @RequestMapping(value="/update_one.do")
     public @ResponseBody
-    Map update(HttpServletRequest rsq, MissionSetting missionSetting,String id) throws Exception{
+    Map update(@RequestParam("appAddress") MultipartFile uploadfile2,HttpServletRequest rsq, MissionSetting missionSetting,String id) throws Exception{
 
 
 
@@ -156,10 +159,12 @@ public class SettingController extends BaseController{
                 if (!StringUtils.isEmpty(fullPath))
                 {
                     //result.put("success", true);
-
+                    if (StringUtils.isEmpty(force)){
+                        force = "0";
+                    }
                     MissionSetting missionSetting = new MissionSetting();
                     missionSetting.setId("apk"+ Util.initRandomId());
-                    missionSetting.setForce(Integer.valueOf(force));
+                    missionSetting.setForceSetting(Integer.valueOf(force));
                     missionSetting.setAppAddress(fullPath);
                     missionSetting.setAppDesc(appDesc);
                     missionSetting.setAppVersion(Integer.valueOf(appVersion));

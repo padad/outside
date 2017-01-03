@@ -108,6 +108,31 @@ public class AppSettingImpl implements IAppSetting {
 
     }
 
+    public Map deleteByPrimaryKey(String key) throws Exception {
+        Map result = new HashMap();
+
+        try {
+            int flag = missionSettingMapper.deleteByPrimaryKey(key);
+
+            if (flag > 0) {
+                result.put("success", true);
+            } else {
+
+                result.put("errorMsg", "删除失败。");
+
+                result.put("failure", true);
+
+            }
+        }
+        catch (Exception e){
+            result.put("errorMsg", e.getMessage());
+
+            result.put("failure", true);
+        }
+
+        return result;
+    }
+
     public int initTableRowsByStatus(int status)
     {
 
