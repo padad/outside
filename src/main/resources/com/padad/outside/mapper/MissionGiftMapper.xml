@@ -5,12 +5,12 @@
     <id column="gift_id" property="giftId" jdbcType="VARCHAR" />
     <result column="gift_title" property="giftTitle" jdbcType="VARCHAR" />
     <result column="gift_price" property="giftPrice" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="type_gift" property="type" jdbcType="INTEGER" />
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
-    <result column="active" property="active" jdbcType="INTEGER" />
+    <result column="active_gift" property="active" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.padad.outside.pojo.MissionGift" extends="BaseResultMap" >
-    <result column="desc" property="desc" jdbcType="LONGVARCHAR" />
+    <result column="desc_gift" property="descGift" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,11 +71,19 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    gift_id, gift_title, gift_price, type, quantity, active
+    gift_id, gift_title, gift_price, type_gift, quantity, active_gift
   </sql>
   <sql id="Blob_Column_List" >
-    desc
+    desc_gift
   </sql>
+  <select id="selectInfo" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mission_gift where active_gift = 1
+    limit  #{0} , #{1}
+  </select>
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.padad.outside.pojo.MissionGiftExample" >
     select
     <if test="distinct" >
@@ -126,11 +134,11 @@
   </delete>
   <insert id="insert" parameterType="com.padad.outside.pojo.MissionGift" >
     insert into mission_gift (gift_id, gift_title, gift_price, 
-      type, quantity, active, 
-      desc)
+      type_gift, quantity, active_gift,
+      desc_gift)
     values (#{giftId,jdbcType=VARCHAR}, #{giftTitle,jdbcType=VARCHAR}, #{giftPrice,jdbcType=VARCHAR}, 
       #{type,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, #{active,jdbcType=INTEGER}, 
-      #{desc,jdbcType=LONGVARCHAR})
+      #{descGift,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.padad.outside.pojo.MissionGift" >
     insert into mission_gift
@@ -145,16 +153,16 @@
         gift_price,
       </if>
       <if test="type != null" >
-        type,
+        type_gift,
       </if>
       <if test="quantity != null" >
         quantity,
       </if>
       <if test="active != null" >
-        active,
+        active_gift,
       </if>
-      <if test="desc != null" >
-        desc,
+      <if test="descGift != null" >
+        desc_gift,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -176,8 +184,8 @@
       <if test="active != null" >
         #{active,jdbcType=INTEGER},
       </if>
-      <if test="desc != null" >
-        #{desc,jdbcType=LONGVARCHAR},
+      <if test="descGift != null" >
+        #{descGift,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -200,16 +208,16 @@
         gift_price = #{record.giftPrice,jdbcType=VARCHAR},
       </if>
       <if test="record.type != null" >
-        type = #{record.type,jdbcType=INTEGER},
+        type_gift = #{record.type,jdbcType=INTEGER},
       </if>
       <if test="record.quantity != null" >
         quantity = #{record.quantity,jdbcType=INTEGER},
       </if>
       <if test="record.active != null" >
-        active = #{record.active,jdbcType=INTEGER},
+        active_gift = #{record.active,jdbcType=INTEGER},
       </if>
       <if test="record.desc != null" >
-        desc = #{record.desc,jdbcType=LONGVARCHAR},
+        desc_gift = #{record.descGift,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -221,10 +229,10 @@
     set gift_id = #{record.giftId,jdbcType=VARCHAR},
       gift_title = #{record.giftTitle,jdbcType=VARCHAR},
       gift_price = #{record.giftPrice,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=INTEGER},
+      type_gift = #{record.type,jdbcType=INTEGER},
       quantity = #{record.quantity,jdbcType=INTEGER},
-      active = #{record.active,jdbcType=INTEGER},
-      desc = #{record.desc,jdbcType=LONGVARCHAR}
+      active_gift = #{record.active,jdbcType=INTEGER},
+      desc_gift = #{record.descGift,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -234,9 +242,9 @@
     set gift_id = #{record.giftId,jdbcType=VARCHAR},
       gift_title = #{record.giftTitle,jdbcType=VARCHAR},
       gift_price = #{record.giftPrice,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=INTEGER},
+      type_gift = #{record.type,jdbcType=INTEGER},
       quantity = #{record.quantity,jdbcType=INTEGER},
-      active = #{record.active,jdbcType=INTEGER}
+      active_gift = #{record.active,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -244,23 +252,23 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.padad.outside.pojo.MissionGift" >
     update mission_gift
     <set >
-      <if test="giftTitle != null" >
+      <if test="giftTitle != null and giftTitle!='' " >
         gift_title = #{giftTitle,jdbcType=VARCHAR},
       </if>
-      <if test="giftPrice != null" >
+      <if test="giftPrice != null and giftPrice!='' " >
         gift_price = #{giftPrice,jdbcType=VARCHAR},
       </if>
       <if test="type != null" >
-        type = #{type,jdbcType=INTEGER},
+        type_gift = #{type,jdbcType=INTEGER},
       </if>
       <if test="quantity != null" >
         quantity = #{quantity,jdbcType=INTEGER},
       </if>
       <if test="active != null" >
-        active = #{active,jdbcType=INTEGER},
+        active_gift = #{active,jdbcType=INTEGER},
       </if>
-      <if test="desc != null" >
-        desc = #{desc,jdbcType=LONGVARCHAR},
+      <if test="descGift != null and descGift!='' " >
+        desc_gift = #{descGift,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where gift_id = #{giftId,jdbcType=VARCHAR}
@@ -269,19 +277,19 @@
     update mission_gift
     set gift_title = #{giftTitle,jdbcType=VARCHAR},
       gift_price = #{giftPrice,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
+      type_gift = #{type,jdbcType=INTEGER},
       quantity = #{quantity,jdbcType=INTEGER},
-      active = #{active,jdbcType=INTEGER},
-      desc = #{desc,jdbcType=LONGVARCHAR}
+      active_gift = #{active,jdbcType=INTEGER},
+      desc_gift = #{descGift,jdbcType=LONGVARCHAR}
     where gift_id = #{giftId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.padad.outside.pojo.MissionGift" >
     update mission_gift
     set gift_title = #{giftTitle,jdbcType=VARCHAR},
       gift_price = #{giftPrice,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
+      type_gift = #{type,jdbcType=INTEGER},
       quantity = #{quantity,jdbcType=INTEGER},
-      active = #{active,jdbcType=INTEGER}
+      active_gift = #{active,jdbcType=INTEGER}
     where gift_id = #{giftId,jdbcType=VARCHAR}
   </update>
 </mapper>

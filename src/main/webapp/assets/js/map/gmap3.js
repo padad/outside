@@ -191,7 +191,7 @@
       that = this, 
       current,
       resolve = {
-        latLng:{ // function => bool (=> address = latLng)
+        latLng:{ // function => bool (=> address.json = latLng)
           map:false, 
           marker:false, 
           infowindow:false, 
@@ -1454,12 +1454,12 @@
     var that = this, i = -1;
     
     function resolve(){
-      // look for next address to resolve
+      // look for next address.json to resolve
       do{
         i++;
       }while( (i < list.length) && !("address" in list[i]) );
       
-      // no address found, so run method 
+      // no address.json found, so run method 
       if (i >= list.length){
         method.apply(ctx, [args]);
         return;
@@ -1727,7 +1727,7 @@
     };
     
     /**
-     * returns address structure from latlng        
+     * returns address.json structure from latlng        
      **/
     this.getaddress = function(args){
       callback(args, args.results, args.status);
@@ -1735,7 +1735,7 @@
     };
     
     /**
-     * returns latlng from an address
+     * returns latlng from an address.json
      **/
     this.getlatlng = function(args){
       callback(args, args.results, args.status);

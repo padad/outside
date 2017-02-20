@@ -33,4 +33,6 @@ public interface MissionGiftMapper {
     int updateByPrimaryKeyWithBLOBs(MissionGift record);
 
     int updateByPrimaryKey(MissionGift record);
+
+    List<MissionGift> selectInfo(int page, int row);
 }

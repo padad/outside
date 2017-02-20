@@ -3,6 +3,7 @@ package com.padad.outside.service.impl;
 import com.padad.outside.mapper.MissionTaskMapper;
 import com.padad.outside.model.UserRecord;
 import com.padad.outside.pojo.MissionTask;
+import com.padad.outside.pojo.MissionTaskExample;
 import com.padad.outside.pojo.MissionTaskWithBLOBs;
 import com.padad.outside.pojo.MissionUserinfo;
 import com.padad.outside.service.TaskService;
@@ -21,7 +22,8 @@ public class TaskServiceImpl implements TaskService {
     private MissionTaskMapper missionTaskMapper;
 
     public UserRecord queryAllTaskRecords(int page, int row) throws Exception {
-        List list = missionTaskMapper.queryAllTask((page-1)*row,(page*row-1));
+
+        List list = missionTaskMapper.queryAllTask((page-1)*row,(page*row));
         UserRecord<MissionTask> userRecord = new UserRecord<MissionTask>();
         userRecord.setUserInfo(list);
         userRecord.setCount(initTableRows());
@@ -60,7 +62,9 @@ public class TaskServiceImpl implements TaskService {
     {
 
         int sum = 0;
-        sum = missionTaskMapper.countBySql();
+        MissionTaskExample missionTaskExample = new MissionTaskExample();
+        missionTaskExample.createCriteria().andActiveEqualTo(1);
+        sum = missionTaskMapper.countByExample(missionTaskExample);
 
         return sum;
     }

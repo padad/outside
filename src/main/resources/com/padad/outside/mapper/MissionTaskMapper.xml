@@ -126,7 +126,7 @@
   <select id="queryAllTask" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
-    from mission_task
+    from mission_task WHERE active = 1
     limit  #{0} , #{1}
   </select>
 

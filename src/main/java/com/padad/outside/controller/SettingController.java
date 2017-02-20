@@ -100,8 +100,8 @@ public class SettingController extends BaseController{
 //
 //        MissionSetting missionSetting = new MissionSetting();
 //        missionSetting.setId(id);
-//        int lastIndexOfShu = address.indexOf("/apk")+1;
-//        String key = address.substring(lastIndexOfShu);
+//        int lastIndexOfShu = address.json.indexOf("/apk")+1;
+//        String key = address.json.substring(lastIndexOfShu);
 //        int flag = qiniuFileUploadService.delete(key);
 
         Map result = iAppSetting.deleteByPrimaryKey(id);

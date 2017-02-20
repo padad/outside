@@ -13,7 +13,7 @@ public class MissionGift {
 
     private Integer active;
 
-    private String desc;
+    private String descGift;
 
     public String getGiftId() {
         return giftId;
@@ -63,11 +63,11 @@ public class MissionGift {
         this.active = active;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescGift() {
+        return descGift;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDescGift(String descGift) {
+        this.descGift = descGift == null ? null : descGift.trim();
     }
 }

@@ -130,6 +130,11 @@ public class TaskController extends BaseController{
 
         missionTask.setKindTitle(str);
         missionTask.setType(Integer.valueOf(value));
+        String sTime = missionTask.getMissionTime();
+        String eTime = missionTask.getMissionEnd();
+        missionTask.setMissionTime(sTime.split("/")[0] + "月" + sTime.split("/")[1] +"日 - "
+                + eTime.split("/")[0] + "月" + eTime.split("/")[1] + "日");
+
 
         int flag = taskService.insertTask(missionTask);
 

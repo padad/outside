@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.padad.outside.mapper.MissionAddressMapper" >
+    <resultMap id="BaseResultMap" type="com.padad.outside.pojo.MissionAddress" >
+        <id column="address_id" property="addressId" jdbcType="VARCHAR" />
+        <result column="address_detail" property="addressDetail" jdbcType="VARCHAR" />
+        <result column="address_name" property="addressName" jdbcType="VARCHAR" />
+        <result column="address_code" property="addressCode" jdbcType="VARCHAR" />
+        <result column="address_phone" property="addressPhone" jdbcType="VARCHAR" />
+        <result column="user_id" property="userId" jdbcType="VARCHAR" />
+        <result column="address_default" property="addressDefault" jdbcType="INTEGER" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        address_id, address_detail, address_name, address_code,address_phone,user_id,address_default
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from mission_address
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+
+
+    <select id="queryInfo" resultMap="BaseResultMap" parameterType="java.lang.Object" >
+        select
+        <include refid="Base_Column_List" />
+        from mission_address
+        where user_id = #{0}
+    </select>
+    <select id="countBySql" parameterType="java.lang.Object" resultType="java.lang.Integer" >
+        select count(*) from mission_address
+    </select>
+    <select id="countBySqls" parameterType="java.lang.String" resultType="java.lang.Integer" >
+        select count(*) from mission_address
+        WHERE user_id = #{0}
+    </select>
+
+    <select id="selectInfo" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from mission_address
+        limit  #{0} , #{1}
+    </select>
+
+    <select id="findInfo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from mission_address
+        WHERE user_id = #{0}
+    </select>
+
+    <insert id="addInfo" parameterType="com.padad.outside.pojo.MissionAddress" >
+        insert into mission_address (address_id, address_detail, address_name,
+        address_code, address_phone,user_id,address_default)
+        values (#{addressId,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR}, #{addressName,jdbcType=VARCHAR},
+        #{addressCode,jdbcType=VARCHAR}, #{addressPhone,jdbcType=VARCHAR},#{userId,jdbcType=VARCHAR},#{addressDefault,jdbcType=INTEGER})
+    </insert>
+
+
+    <update id="updateInfo" parameterType="com.padad.outside.pojo.MissionAddress" >
+        update mission_address
+        <set >
+            <if test="addressDetail != null and addressDetail !='' " >
+                address_detail = #{addressDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="addressName != null and addressName !='' " >
+                address_name = #{addressName,jdbcType=VARCHAR},
+            </if>
+            <if test="addressCode != null and addressCode!='' " >
+                address_code = #{addressCode,jdbcType=VARCHAR},
+            </if>
+            <if test="addressPhone != null and addressPhone!='' " >
+                address_phone = #{addressPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null and userId!='' " >
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where address_id = #{addressId,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteInfo" parameterType="java.lang.String" >
+        delete from mission_address
+        where address_id = #{addressId,jdbcType=VARCHAR}
+    </delete>
+
+</mapper>

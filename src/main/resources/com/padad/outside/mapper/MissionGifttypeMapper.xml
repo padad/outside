@@ -3,8 +3,9 @@
 <mapper namespace="com.padad.outside.mapper.MissionGifttypeMapper" >
   <resultMap id="BaseResultMap" type="com.padad.outside.pojo.MissionGifttype" >
     <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="type_gift" property="typeGift" jdbcType="INTEGER" />
     <result column="gift_title" property="giftTitle" jdbcType="VARCHAR" />
+    <result column="active_gift" property="activeGift" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, type, gift_title
+    id, type_gift, gift_title,active_gift
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.padad.outside.pojo.MissionGifttypeExample" >
     select
@@ -98,9 +99,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.padad.outside.pojo.MissionGifttype" >
-    insert into mission_gifttype (id, type, gift_title
+    insert into mission_gifttype (id, type_gift, gift_title,active_gift
       )
-    values (#{id,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{giftTitle,jdbcType=VARCHAR}
+    values (#{id,jdbcType=VARCHAR}, #{type_gift,jdbcType=INTEGER}, #{giftTitle,jdbcType=VARCHAR},#{active_gift,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.padad.outside.pojo.MissionGifttype" >
