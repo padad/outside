@@ -21,7 +21,7 @@ public class MyTaskServiceImpl implements MyTaskService {
     private MissionMytaskMapper missionMytaskMapper;
 
     public UserRecord queryAllMyTaskRecords(int page, int row) throws Exception {
-        List list = missionMytaskMapper.queryAllMyTask((page-1)*row,(page*row-1));
+        List list = missionMytaskMapper.queryAllMyTask((page-1)*row,row);
         UserRecord<MissionMytask> userRecord = new UserRecord<MissionMytask>();
         userRecord.setUserInfo(list);
         userRecord.setCount(initTableRows());
@@ -33,7 +33,7 @@ public class MyTaskServiceImpl implements MyTaskService {
         int page = taskSearchModel.getPage();
         int rows = taskSearchModel.getRow();
         taskSearchModel.setPage((page-1)*rows);
-        taskSearchModel.setRow(page*rows-1);
+        taskSearchModel.setRow(page*rows);
 
         List list = missionMytaskMapper.queryAllMyTaskByModel(taskSearchModel);
 

@@ -20,7 +20,7 @@ public class MissionTypeImpl implements IMissionTypeService {
     private MissionTasktypeMapper missionTasktypeMapper;
 
     public UserRecord queryAllRecords(int page, int row) throws Exception {
-        List list = missionTasktypeMapper.queryAllRecords((page-1)*row,(page*row-1));
+        List list = missionTasktypeMapper.queryAllRecords((page-1)*row,row);
         UserRecord<MissionTasktype> userRecord = new UserRecord<MissionTasktype>();
         userRecord.setUserInfo(list);
         userRecord.setCount(initTableRows());

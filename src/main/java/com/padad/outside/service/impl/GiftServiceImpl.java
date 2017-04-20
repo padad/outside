@@ -30,7 +30,7 @@ public class GiftServiceImpl implements IGiftService {
         try
         {
 
-            List<MissionGift> list = missionGiftMapper.selectInfo((page-1)*row,(page*row-1));
+            List<MissionGift> list = missionGiftMapper.selectInfo((page-1)*row,row);
 
             commonList.setRows(list);
             MissionGiftExample missionGiftExample = new MissionGiftExample();

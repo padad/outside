@@ -29,7 +29,7 @@ public class AuthServiceImpl implements IAuthService {
         int page = authSearchModel.getPage();
         int rows = authSearchModel.getRow();
         authSearchModel.setPage((page-1)*rows);
-        authSearchModel.setRow(page*rows-1);
+        authSearchModel.setRow(rows);
 
         int total = initTableRowsByStatus(authSearchModel.getActiveAuth());
         List<MissionAuth> list = missionAuthMapper.queryRecordByModel(authSearchModel);

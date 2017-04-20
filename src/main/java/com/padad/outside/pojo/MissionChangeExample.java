@@ -454,63 +454,63 @@ public class MissionChangeExample {
             return (Criteria) this;
         }
 
-        public Criteria andNumberIsNull() {
-            addCriterion("number is null");
+        public Criteria andNumberChangeIsNull() {
+            addCriterion("numberChange is null");
             return (Criteria) this;
         }
 
-        public Criteria andNumberIsNotNull() {
-            addCriterion("number is not null");
+        public Criteria andNumberChangeIsNotNull() {
+            addCriterion("numberChange is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNumberEqualTo(Integer value) {
-            addCriterion("number =", value, "number");
+        public Criteria andNumberChangeEqualTo(Integer value) {
+            addCriterion("numberChange =", value, "numberChange");
             return (Criteria) this;
         }
 
-        public Criteria andNumberNotEqualTo(Integer value) {
-            addCriterion("number <>", value, "number");
+        public Criteria andNumberChangeNotEqualTo(Integer value) {
+            addCriterion("numberChange <>", value, "numberChange");
             return (Criteria) this;
         }
 
-        public Criteria andNumberGreaterThan(Integer value) {
-            addCriterion("number >", value, "number");
+        public Criteria andNumberChangeGreaterThan(Integer value) {
+            addCriterion("numberChange >", value, "numberChange");
             return (Criteria) this;
         }
 
-        public Criteria andNumberGreaterThanOrEqualTo(Integer value) {
-            addCriterion("number >=", value, "number");
+        public Criteria andNumberChangeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("numberChange >=", value, "numberChange");
             return (Criteria) this;
         }
 
-        public Criteria andNumberLessThan(Integer value) {
-            addCriterion("number <", value, "number");
+        public Criteria andNumberChangeLessThan(Integer value) {
+            addCriterion("numberChange <", value, "numberChange");
             return (Criteria) this;
         }
 
-        public Criteria andNumberLessThanOrEqualTo(Integer value) {
-            addCriterion("number <=", value, "number");
+        public Criteria andNumberChangeLessThanOrEqualTo(Integer value) {
+            addCriterion("numberChange <=", value, "numberChange");
             return (Criteria) this;
         }
 
-        public Criteria andNumberIn(List<Integer> values) {
-            addCriterion("number in", values, "number");
+        public Criteria andNumberChangeIn(List<Integer> values) {
+            addCriterion("numberChange in", values, "numberChange");
             return (Criteria) this;
         }
 
-        public Criteria andNumberNotIn(List<Integer> values) {
-            addCriterion("number not in", values, "number");
+        public Criteria andNumberChangeNotIn(List<Integer> values) {
+            addCriterion("numberChange not in", values, "numberChange");
             return (Criteria) this;
         }
 
-        public Criteria andNumberBetween(Integer value1, Integer value2) {
-            addCriterion("number between", value1, value2, "number");
+        public Criteria andNumberChangeBetween(Integer value1, Integer value2) {
+            addCriterion("numberChange between", value1, value2, "numberChange");
             return (Criteria) this;
         }
 
-        public Criteria andNumberNotBetween(Integer value1, Integer value2) {
-            addCriterion("number not between", value1, value2, "number");
+        public Criteria andNumberChangeNotBetween(Integer value1, Integer value2) {
+            addCriterion("numberChange not between", value1, value2, "numberChange");
             return (Criteria) this;
         }
     }

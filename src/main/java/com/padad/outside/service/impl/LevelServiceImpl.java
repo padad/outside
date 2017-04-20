@@ -27,7 +27,7 @@ public class LevelServiceImpl implements ILevelService {
         int page = levelSearchModel.getPage();
         int rows = levelSearchModel.getRow();
         levelSearchModel.setPage((page-1)*rows);
-        levelSearchModel.setRow(page*rows);
+        levelSearchModel.setRow(rows);
 
         int total = initTableRowsByStatus(levelSearchModel.getActiveLevel());
         List<MissionLevel> list = missionLevelMapper.queryRecordByModel(levelSearchModel);

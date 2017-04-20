@@ -40,7 +40,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 //        String ddd = "limit "+(page-1)*row+"," + (page*row-1) + "";
 //        missionUserinfoExample.setOrderByClause(ddd);
 
-        List list = missionUserinfoMapper.queryAllUser((page-1)*row,(page*row-1));
+        List list = missionUserinfoMapper.queryAllUser((page-1)*row,row);
         UserRecord<MissionUserinfo> userRecord = new UserRecord<MissionUserinfo>();
         userRecord.setUserInfo(list);
         userRecord.setCount(initTableRows());

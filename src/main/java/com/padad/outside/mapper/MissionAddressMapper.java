@@ -23,4 +23,5 @@ public interface MissionAddressMapper {
 
     List<MissionAddress> findInfo(String search_value);
 
+    MissionAddress selectByInfo(String toid);
 }

@@ -29,7 +29,7 @@ public class StarServiceImpl implements IStarService {
         int page = starSearchModel.getPage();
         int rows = starSearchModel.getRow();
         starSearchModel.setPage((page-1)*rows);
-        starSearchModel.setRow(page*rows-1);
+        starSearchModel.setRow(rows);
 
         int total = initTableRowsByStatus(starSearchModel.getActiveStar());
         List<MissionAuth> list = missionStarMapper.queryRecordByModel(starSearchModel);

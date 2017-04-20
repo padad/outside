@@ -29,7 +29,7 @@ public class MissionBankServiceImpl implements IMissionBankService {
 
         try
         {
-            List<MissionAddress> list = missionBankMapper.selectInfo((page-1)*row,(page*row-1));
+            List<MissionAddress> list = missionBankMapper.selectInfo((page-1)*row,row);
 
             commonList.setRows(list);
             commonList.setTotal(initTableRows());

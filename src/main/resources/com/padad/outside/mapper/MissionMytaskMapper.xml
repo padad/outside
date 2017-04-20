@@ -147,7 +147,7 @@
       <if test="missionid != null and missionid!='' " >
         and mission_id = #{missionid,jdbcType=VARCHAR}
       </if>
-      <if test="status != null and status!='' " >
+      <if test="status != null" >
         and status = #{status,jdbcType=INTEGER}
       </if>
     </where>

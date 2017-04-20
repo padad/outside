@@ -50,7 +50,8 @@ public class GiftController extends BaseController {
     public @ResponseBody
     Map addressSave(HttpServletRequest request, MissionGift missionGift,String value)throws Exception
     {
-        missionGift.setDescGift(value);
+        String str = new String(new String(value.getBytes("iso-8859-1"),"UTF-8"));
+        missionGift.setDescGift(str);
         Map map = iGiftService.addInfo(missionGift);
         return map;
     }
@@ -63,9 +64,12 @@ public class GiftController extends BaseController {
      */
     @RequestMapping(value="/update_one.do")
     public @ResponseBody
-    Map update_one(HttpServletRequest request, MissionGift missionGift,String value)throws Exception
+    Map update_one(HttpServletRequest request,String id, MissionGift missionGift,String value)throws Exception
     {
-        missionGift.setDescGift(value);
+        String str = new String(new String(value.getBytes("iso-8859-1"),"UTF-8"));
+        missionGift.setGiftId(id);
+        //str = str.split("&value=")[1];
+        missionGift.setDescGift(str);
         Map map = iGiftService.updateInfo(missionGift);
         return map;
     }

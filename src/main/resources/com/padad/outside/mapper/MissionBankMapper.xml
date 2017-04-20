@@ -48,6 +48,13 @@
         WHERE user_id = #{0}
     </select>
 
+    <select id="selectByInfo" resultMap="BaseResultMap" parameterType="java.lang.Object" >
+        select
+        <include refid="Base_Column_List" />
+        from mission_bank
+        where bank_id = #{0}
+    </select>
+
     <insert id="addInfo" parameterType="com.padad.outside.pojo.MissionBank" >
         insert into mission_bank (bank_id, bank_address, bank_type,
         bank_default, user_id,bank_name)

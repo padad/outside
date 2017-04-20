@@ -24,4 +24,5 @@ public interface MissionBankMapper {
 
     List<MissionBank> findInfo(String search_value);
 
+    MissionBank selectByInfo(String toid);
 }

@@ -19,9 +19,11 @@ public class StepServiceImpl implements StepService{
     @Autowired
     private MissionStepsMapper missionStepsMapper;
 
+    //https://itunes.apple.com/cn/app/id789758903?mt=8
+    //https://itunes.apple.com/us/app/hai-rong-yi/id982486696?l=zh&ls=1&mt=8
 
     public UserRecord queryAllStepRecords(int page, int row) throws Exception {
-        List list = missionStepsMapper.queryAllStep((page-1)*row,(page*row-1));
+        List list = missionStepsMapper.queryAllStep((page-1)*row,row);
         UserRecord<MissionSteps> userRecord = new UserRecord<MissionSteps>();
         userRecord.setUserInfo(list);
         userRecord.setCount(initTableRows());

@@ -33,4 +33,8 @@ public interface MissionChangeMapper {
     int updateByPrimaryKeyWithBLOBs(MissionChange record);
 
     int updateByPrimaryKey(MissionChange record);
+
+    List<MissionChange> selectInfo(int page, int row);
+
+    int countBySqls(int i);
 }

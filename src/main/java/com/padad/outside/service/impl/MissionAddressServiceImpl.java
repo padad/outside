@@ -29,7 +29,7 @@ public class MissionAddressServiceImpl implements IMissionAddressService {
 
         try
         {
-            List<MissionAddress> list = missionAddressMapper.selectInfo((page-1)*row,(page*row-1));
+            List<MissionAddress> list = missionAddressMapper.selectInfo((page-1)*row,row);
 
             commonList.setRows(list);
             commonList.setTotal(initTableRows());

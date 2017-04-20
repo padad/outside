@@ -4,6 +4,7 @@ import com.padad.outside.model.CommonList;
 import com.padad.outside.model.TaskSearchModel;
 import com.padad.outside.model.UserRecord;
 import com.padad.outside.pojo.MissionMytask;
+import com.padad.outside.pojo.MissionMytaskExample;
 import com.padad.outside.pojo.MissionTask;
 import com.padad.outside.pojo.MissionUserinfo;
 import com.padad.outside.service.MyTaskService;
@@ -39,7 +40,7 @@ public class MyTaskController extends BaseController {
     CommonList mytaskList(HttpServletRequest request)throws Exception
     {
 
-
+        int i = 0;
         int page = request.getParameter("page")==null?1:Integer.valueOf(request.getParameter("page"));
         int row = request.getParameter("rows")==null?10:Integer.valueOf(request.getParameter("rows"));
 
@@ -83,9 +84,12 @@ public class MyTaskController extends BaseController {
         taskSearchModel.setPage(page);
         taskSearchModel.setRow(row);
 
-        UserRecord<MissionUserinfo> ur = myTaskService.queryMyTaskByModel(taskSearchModel);
+        UserRecord<MissionMytask> ur = myTaskService.queryMyTaskByModel(taskSearchModel);
+//        MissionMytaskExample missionMytaskExample = new MissionMytaskExample();
+//        missionMytaskExample.createCriteria().andStatusEqualTo(Integer.valueOf(stat));
+
         int total = ur.getCount();
-        List<MissionUserinfo> list = ur.getUserInfo();
+        List<MissionMytask> list = ur.getUserInfo();
         CommonList cj = new CommonList();
         try
         {

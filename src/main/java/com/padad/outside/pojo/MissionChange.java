@@ -11,9 +11,13 @@ public class MissionChange {
 
     private String userId;
 
-    private Integer number;
+    private Integer numberChange;
 
-    private String desc;
+    private Integer status;
+
+    private String toId;
+
+    private String descGift;
 
     public String getChangeId() {
         return changeId;
@@ -55,19 +59,35 @@ public class MissionChange {
         this.userId = userId == null ? null : userId.trim();
     }
 
-    public Integer getNumber() {
-        return number;
+    public Integer getNumberChange() {
+        return numberChange;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public void setNumberChange(Integer numberChange) {
+        this.numberChange = numberChange;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescGift() {
+        return descGift;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDescGift(String descGift) {
+        this.descGift = descGift;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getToId() {
+        return toId;
+    }
+
+    public void setToId(String toId) {
+        this.toId = toId;
     }
 }

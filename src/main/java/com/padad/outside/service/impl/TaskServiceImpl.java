@@ -23,7 +23,7 @@ public class TaskServiceImpl implements TaskService {
 
     public UserRecord queryAllTaskRecords(int page, int row) throws Exception {
 
-        List list = missionTaskMapper.queryAllTask((page-1)*row,(page*row));
+        List list = missionTaskMapper.queryAllTask((page-1)*row,row);
         UserRecord<MissionTask> userRecord = new UserRecord<MissionTask>();
         userRecord.setUserInfo(list);
         userRecord.setCount(initTableRows());
